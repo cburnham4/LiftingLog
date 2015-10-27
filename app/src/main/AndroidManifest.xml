@@ -14,7 +14,7 @@
         android:allowBackup="true"
         android:icon="@drawable/lift_icon114"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/MyMaterialTheme" >
         <activity
             android:name=".Activity_Days"
             android:label="@string/app_name" >

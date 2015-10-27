@@ -2,22 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
-    xmlns:Amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
     tools:context=".MainActivity">
 
-    <ListView
-        android:id="@+id/days"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:paddingLeft="2dp"
-        android:layout_below="@+id/AddDayLinear"
-        android:background="@color/white"
-        android:layout_above="@+id/ad_layout"
-        android:layout_alignParentStart="false">
-    </ListView>
-
+    <include layout="@layout/toolbar"
+        ></include>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -25,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:id="@+id/AddDayLinear"
-        android:layout_below="@+id/PageName"
+        android:layout_below="@+id/toolbar"
         android:weightSum="1"
         android:background="@color/primary"
         android:padding="5dp">
@@ -59,35 +47,17 @@
     </LinearLayout>
 
 
-
-
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
+    <ListView
+        android:id="@+id/days"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/PageName"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@color/primaryDark">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Days of Workout"
-            android:id="@+id/textView"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/white"
-            android:textIsSelectable="false"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp" />
-    </LinearLayout>
+        android:paddingLeft="2dp"
+        android:layout_below="@+id/AddDayLinear"
+        android:background="@color/white"
+        android:layout_above="@+id/ad_layout"
+        android:layout_alignParentStart="false">
+    </ListView>
 
     <include layout="@layout/ad_layout"></include>
 

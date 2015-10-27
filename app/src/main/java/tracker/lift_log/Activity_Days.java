@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -27,7 +28,7 @@ import tracker.lift_log.CustomDialogs.EditDayLiftDialog;
 import tracker.lift_log.ListViewHelpers.Day;
 import tracker.lift_log.ListViewHelpers.DaysAdapter;
 
-public class Activity_Days extends FragmentActivity {
+public class Activity_Days extends AppCompatActivity {
     private ArrayList<Day> arrayOfDays;
 
 	private LiftDatabase dbHelper; //The db helper that links to the sqlite db
