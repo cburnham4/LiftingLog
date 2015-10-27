@@ -37,7 +37,7 @@ public class Activity_Days extends FragmentActivity {
 
     private Button btn_addDay;
     private ListView lv_days;
-    TextView tv;
+    TextView tv_inputDay;
     SQLQueryHelper SQLHelper;
 
     private AdsHelper adsHelper;
@@ -52,19 +52,11 @@ public class Activity_Days extends FragmentActivity {
         adsHelper.runAds();
 
         this.instantiateDBHelpers();
-
-        //GET VIEWS
-		lv_days = (ListView)findViewById(R.id.days);
-        btn_addDay = (Button) findViewById(R.id.addLift);
-        tv = (TextView) findViewById(R.id.inputLift);
+        this.findViews();
 
         arrayOfDays = new ArrayList<>();
-
         this.getDaysFromDataBase();
-
-        Log.e("SIZE OF ARRAY", "+ " + arrayOfDays.size());
         daysAdapter = new DaysAdapter(this, arrayOfDays);
-
         lv_days.setAdapter(daysAdapter);
 
         btn_addDay.setOnClickListener(onSave);
@@ -73,10 +65,9 @@ public class Activity_Days extends FragmentActivity {
         lv_days.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Intent intent = new Intent(Activity_Days.this, Activity_Lifts.class);//CHANGE TO
-                //adapter.notifyDataSetChanged();
+                /* When a day is selected go to the Lifts Activity */
+                Intent intent = new Intent(Activity_Days.this, Activity_Lifts.class);
                 Day day = daysAdapter.getItem(position);
-                //int did = getDid(name);
                 int did = day.getDid();
                 String name = day.getDay();
                 intent.putExtra("ITEM_CLICKED", did);
@@ -90,16 +81,18 @@ public class Activity_Days extends FragmentActivity {
 
     private View.OnClickListener onSave = new View.OnClickListener() {
         public void onClick(View v) {
-            String newDay = tv.getText().toString();
+            String newDay = tv_inputDay.getText().toString();
             if (!newDay.isEmpty()){
+                /* Insert the new day into the database */
                 ContentValues values = new ContentValues();
                 values.put("day", newDay);
                 writableDB.insert("Days", null, values);
 
+                /* Add the new day to the listview */
                 arrayOfDays.add(new Day(SQLHelper.getLastDid(), newDay));
                 daysAdapter.notifyDataSetChanged();
 
-                tv.setText("");
+                tv_inputDay.setText("");
             }
 
         }
@@ -131,8 +124,11 @@ public class Activity_Days extends FragmentActivity {
     private void displayDialog(Day day){
         EditDayLiftDialog editDayLiftDialog = new EditDayLiftDialog();
         final Day d = day;
+
+        /* Set the name for the dialog to use */
         editDayLiftDialog.setName(day.getDay());
 
+        /* Set the callback for when the user presses Finish */
         editDayLiftDialog.setCallback(new EditDayLiftDialog.EditDayLiftListener() {
             @Override
             public void onDialogPositiveClick(DialogFragment dialog, String newName) {
@@ -142,21 +138,24 @@ public class Activity_Days extends FragmentActivity {
 
         editDayLiftDialog.show(this.getSupportFragmentManager(), "Edit_Day");
     }
+
     private void updateDB(Day day, String newName){
+        /*Update the day in the Database */
         ContentValues newValues = new ContentValues();
         newValues.put("day", newName);
         writableDB.update("Days", newValues, "did= " + day.getDid(), null);
+        /*Update the day on the listview */
         day.setDay(newName);
         daysAdapter.notifyDataSetChanged();
     }
 
     private void deleteFromDatabase(Day day){
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        //SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         int did = day.getDid();
         /* Delete from db where did */
-        db.delete("Days", "did = " + did, null);
-        db.delete("Lifts", "did = " + did, null);
+        writableDB.delete("Days", "did = " + did, null);
+        writableDB.delete("Lifts", "did = " + did, null);
 
         arrayOfDays.remove(day);
         daysAdapter.notifyDataSetChanged();
@@ -177,6 +176,13 @@ public class Activity_Days extends FragmentActivity {
         dbHelper = new LiftDatabase(getBaseContext());
         SQLHelper = new SQLQueryHelper(getBaseContext());
         writableDB = dbHelper.getWritableDatabase();
+    }
+
+    private void findViews(){
+        lv_days = (ListView)findViewById(R.id.days);
+        btn_addDay = (Button) findViewById(R.id.addLift);
+        tv_inputDay = (TextView) findViewById(R.id.inputLift);
+
     }
 
     @Override
