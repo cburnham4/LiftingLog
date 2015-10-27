@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:Amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads">
+
+    <ListView
+        android:id="@+id/Lifts"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="2dp"
+        android:layout_below="@+id/AddDayLinear"
+        android:background="@color/white"
+        android:layout_above="@+id/AdLayoutLifts"
+        android:layout_alignParentStart="false">
+    </ListView>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/AddDayLinear"
+        android:layout_below="@+id/PageName"
+        android:weightSum="1"
+        android:background="@color/primary"
+        android:padding="5dp">
+
+        <EditText
+            android:id="@+id/inputLift"
+            android:layout_width="247dp"
+            android:layout_height="match_parent"
+            android:ems="20"
+            android:background="@color/white"
+            android:layout_marginLeft="10dp"
+            android:hint="Ex. Bicep Barbell Curl">
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/addLift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="Add Lift"
+            android:visibility="visible"
+            android:paddingLeft="2dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/white" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/PageName"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/primaryDark">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Lifts"
+            android:id="@+id/liftName"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textIsSelectable="false"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <include layout="@layout/ad_layout"></include>
+
+
+</RelativeLayout>
