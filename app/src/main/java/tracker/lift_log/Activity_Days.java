@@ -68,7 +68,7 @@ public class Activity_Days extends AppCompatActivity {
         daysAdapter = new DaysAdapter(this, arrayOfDays);
         lv_days.setAdapter(daysAdapter);
 
-        btn_addDay.setOnClickListener(onSave);
+       // btn_addDay.setOnClickListener(onSave);
         registerForContextMenu(lv_days);
         
         lv_days.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -132,6 +132,7 @@ public class Activity_Days extends AppCompatActivity {
     private void setUpToolbar(){
         toolbar = (Toolbar) findViewById(R.id.toolbar); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);
+        //toolbar.setLogo(R.drawable.icon114);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

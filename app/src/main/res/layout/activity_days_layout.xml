@@ -7,6 +7,7 @@
     <include layout="@layout/toolbar"
         ></include>
 
+    <!--
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -45,7 +46,7 @@
 
 
     </LinearLayout>
-
+-->
 
     <ListView
         android:id="@+id/days"
@@ -53,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:paddingLeft="2dp"
-        android:layout_below="@+id/AddDayLinear"
+        android:layout_below="@+id/toolbar"
         android:background="@color/white"
         android:layout_above="@+id/ad_layout"
         android:layout_alignParentStart="false">
