@@ -51,6 +51,8 @@ public class Activity_Lifts extends FragmentActivity {
 		Intent recievedIntent = getIntent();
 		this.did = recievedIntent.getIntExtra("ITEM_CLICKED", 0);
 
+
+
         adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_lifts),this);
         adsHelper.runAds();
 
@@ -143,7 +145,7 @@ public class Activity_Lifts extends FragmentActivity {
     private void updateDB(Lift lift, String newName){
         ContentValues newValues = new ContentValues();
         newValues.put("liftname", newName);
-        writableDB.update("Lifts", newValues, "lid= " + lift.getLift(), null);
+        writableDB.update("Lifts", newValues, "lid= " + lift.getLid(), null);
         lift.setLift(newName);
         liftAdapter.notifyDataSetChanged();
     }

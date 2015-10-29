@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,14 +45,19 @@ public class Activity_Days extends AppCompatActivity {
 
     private AdsHelper adsHelper;
 
+    private Toolbar toolbar;
+
+
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_days_layout);
+        setContentView(R.layout.activity_days_layout);
 
         adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_days),this);
         adsHelper.runAds();
+
+        this.setUpToolbar();
 
         this.instantiateDBHelpers();
         this.findViews();
@@ -121,7 +128,30 @@ public class Activity_Days extends AppCompatActivity {
         }
         return true;
     }
+    private void setUpToolbar(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar); // Attaching the layout to the toolbar object
+        setSupportActionBar(toolbar);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_tb_day_lift, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        switch (id){
+            case R.id.action_add:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
     private void displayDialog(Day day){
         EditDayLiftDialog editDayLiftDialog = new EditDayLiftDialog();
         final Day d = day;

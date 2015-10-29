@@ -6,5 +6,5 @@
     android:layout_height="wrap_content"
     android:background="@color/primary"
     app:layout_scrollFlags="scroll|enterAlways"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    android:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
