@@ -26,6 +26,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import HelperFiles.SQLQueryHelper;
+import tracker.lift_log.CustomDialogs.AddDayLiftDialog;
 import tracker.lift_log.CustomDialogs.EditDayLiftDialog;
 import tracker.lift_log.ListViewHelpers.Day;
 import tracker.lift_log.ListViewHelpers.DaysAdapter;
@@ -147,6 +148,28 @@ public class Activity_Days extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.action_add:
+                AddDayLiftDialog addDayLiftDialog = new AddDayLiftDialog();
+                addDayLiftDialog.setCallback(new AddDayLiftDialog.AddDayLiftListener() {
+                    @Override
+                    public void onDialogPositiveClick(String newName) {
+                        if (!newName.isEmpty()){
+                /* Insert the new day into the database */
+                            ContentValues values = new ContentValues();
+                            values.put("day", newName);
+                            writableDB.insert("Days", null, values);
+
+                /* Add the new day to the listview */
+                            arrayOfDays.add(new Day(SQLHelper.getLastDid(), newName));
+                            daysAdapter.notifyDataSetChanged();
+
+                            tv_inputDay.setText("");
+                        }else{
+                            Toast.makeText(getApplicationContext(), "No text was provided", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+                addDayLiftDialog.show(this.getSupportFragmentManager(), "Add_Muscle");
                 break;
         }
 
