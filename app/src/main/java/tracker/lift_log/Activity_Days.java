@@ -9,24 +9,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import HelperFiles.SQLQueryHelper;
-import tracker.lift_log.CustomDialogs.AddDayLiftDialog;
+import tracker.lift_log.CustomDialogs.AddDayDialog;
 import tracker.lift_log.CustomDialogs.EditDayLiftDialog;
 import tracker.lift_log.ListViewHelpers.Day;
 import tracker.lift_log.ListViewHelpers.DaysAdapter;
@@ -128,8 +124,8 @@ public class Activity_Days extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.action_add:
-                AddDayLiftDialog addDayLiftDialog = new AddDayLiftDialog();
-                addDayLiftDialog.setCallback(new AddDayLiftDialog.AddDayLiftListener() {
+                AddDayDialog addDayLiftDialog = new AddDayDialog();
+                addDayLiftDialog.setCallback(new AddDayDialog.AddDayListener() {
                     @Override
                     public void onDialogPositiveClick(String newName) {
                         if (!newName.isEmpty()){
