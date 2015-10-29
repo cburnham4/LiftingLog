@@ -39,9 +39,8 @@ public class Activity_Days extends AppCompatActivity {
 
     private DaysAdapter daysAdapter; //adapter used for list view
 
-    private Button btn_addDay;
     private ListView lv_days;
-    TextView tv_inputDay;
+
     SQLQueryHelper SQLHelper;
 
     private AdsHelper adsHelper;
@@ -52,7 +51,7 @@ public class Activity_Days extends AppCompatActivity {
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_days_layout);
 
         adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_days),this);
@@ -87,26 +86,6 @@ public class Activity_Days extends AppCompatActivity {
 
 
     }
-
-    private View.OnClickListener onSave = new View.OnClickListener() {
-        public void onClick(View v) {
-            String newDay = tv_inputDay.getText().toString();
-            if (!newDay.isEmpty()){
-                /* Insert the new day into the database */
-                ContentValues values = new ContentValues();
-                values.put("day", newDay);
-                writableDB.insert("Days", null, values);
-
-                /* Add the new day to the listview */
-                arrayOfDays.add(new Day(SQLHelper.getLastDid(), newDay));
-                daysAdapter.notifyDataSetChanged();
-
-                tv_inputDay.setText("");
-            }
-
-        }
-    };
-
     /**
      * Set up the context menu
      */
@@ -162,8 +141,6 @@ public class Activity_Days extends AppCompatActivity {
                 /* Add the new day to the listview */
                             arrayOfDays.add(new Day(SQLHelper.getLastDid(), newName));
                             daysAdapter.notifyDataSetChanged();
-
-                            tv_inputDay.setText("");
                         }else{
                             Toast.makeText(getApplicationContext(), "No text was provided", Toast.LENGTH_SHORT).show();
                         }
@@ -235,9 +212,6 @@ public class Activity_Days extends AppCompatActivity {
 
     private void findViews(){
         lv_days = (ListView)findViewById(R.id.days);
-        btn_addDay = (Button) findViewById(R.id.addLift);
-        tv_inputDay = (TextView) findViewById(R.id.inputLift);
-
     }
 
     @Override

@@ -7,46 +7,6 @@
     <include layout="@layout/toolbar"
         ></include>
 
-    <!--
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/AddDayLinear"
-        android:layout_below="@+id/toolbar"
-        android:weightSum="1"
-        android:background="@color/primary"
-        android:padding="5dp">
-
-        <EditText
-            android:id="@+id/inputLift"
-            android:layout_width="247dp"
-            android:layout_height="match_parent"
-
-
-            android:background="@color/white"
-            android:layout_marginLeft="10dp"
-            android:hint="Ex. Back">
-            <requestFocus />
-        </EditText>
-
-        <Button
-            android:id="@+id/addLift"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-
-            android:text="Add Muscle"
-            android:visibility="visible"
-            android:paddingLeft="2dp"
-            android:layout_marginLeft="10dp"
-            android:background="@color/white" />
-
-
-    </LinearLayout>
--->
 
     <ListView
         android:id="@+id/days"
