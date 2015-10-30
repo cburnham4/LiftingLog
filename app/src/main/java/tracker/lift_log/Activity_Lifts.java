@@ -54,10 +54,10 @@ public class Activity_Lifts extends AppCompatActivity {
 
         this.setUpToolbar();
 
-        //adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_lifts),this);
-        //adsHelper.runAds();
+        adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_lifts),this);
+        adsHelper.runAds();
 
-        this.setTitle("Muscle: "+recievedIntent.getStringExtra("DAY_NAME"));
+        this.setTitle("Muscle Group: "+recievedIntent.getStringExtra("DAY_NAME"));
         //TextView textView = (TextView) findViewById(R.id.liftName);
         //textView.setText();
 
@@ -217,18 +217,18 @@ public class Activity_Lifts extends AppCompatActivity {
 
     @Override
     public void onPause() {
-        //adsHelper.onPause();
+        adsHelper.onPause();
         super.onPause();
     }
 
     public void onResume(){
-        //adsHelper.onResume();
+        adsHelper.onResume();
         super.onResume();
     }
 
     @Override
     public void onDestroy() {
-        //adsHelper.onDestroy();
+        adsHelper.onDestroy();
         super.onDestroy();
     }
 }
