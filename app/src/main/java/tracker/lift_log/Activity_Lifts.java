@@ -1,21 +1,19 @@
 package tracker.lift_log;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,12 +21,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import HelperFiles.SQLQueryHelper;
+
+import tracker.lift_log.CustomDialogs.AddLiftDialog;
 import tracker.lift_log.CustomDialogs.EditDayLiftDialog;
-import tracker.lift_log.ListViewHelpers.Day;
 import tracker.lift_log.ListViewHelpers.Lift;
 import tracker.lift_log.ListViewHelpers.LiftsAdapter;
 
-public class Activity_Lifts extends FragmentActivity {
+public class Activity_Lifts extends AppCompatActivity {
     //INSTANCE VARIABLES
     private ArrayList<Lift> arrayOfLifts;
 
@@ -42,27 +41,30 @@ public class Activity_Lifts extends FragmentActivity {
     private AdsHelper adsHelper;
     private int did;
     private TextView inputLift;
+    
+    private Toolbar toolbar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_lifts_layout);
+		setContentView(R.layout.activity_lifts_days_layout);
         //GET DID
 		Intent recievedIntent = getIntent();
 		this.did = recievedIntent.getIntExtra("ITEM_CLICKED", 0);
 
+        this.setUpToolbar();
 
+        //adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_lifts),this);
+        //adsHelper.runAds();
 
-        adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_lifts),this);
-        adsHelper.runAds();
-
-        TextView textView = (TextView) findViewById(R.id.liftName);
-        textView.setText("Day: "+recievedIntent.getStringExtra("DAY_NAME"));
+        this.setTitle("Muscle: "+recievedIntent.getStringExtra("DAY_NAME"));
+        //TextView textView = (TextView) findViewById(R.id.liftName);
+        //textView.setText();
 
         arrayOfLifts = new ArrayList<Lift>();
         
         //lifts  =new ArrayList<String>();
-		lv_lifts = (ListView)findViewById(R.id.Lifts);
+		lv_lifts = (ListView)findViewById(R.id.lv_days_lifts);
 
         // Gets the data repository in write mode
         this.instantiateDBHelpers();
@@ -72,9 +74,6 @@ public class Activity_Lifts extends FragmentActivity {
         liftAdapter = new LiftsAdapter(this, arrayOfLifts);
 
 		lv_lifts.setAdapter(liftAdapter);
-		
-        final Button addLift = (Button) findViewById(R.id.addLift);
-        inputLift = (TextView) findViewById(R.id.inputLift);
 
         
         lv_lifts.setOnItemClickListener(new OnItemClickListener() {
@@ -87,26 +86,22 @@ public class Activity_Lifts extends FragmentActivity {
             }
         });
 
-        addLift.setOnClickListener(onSave);
         registerForContextMenu(lv_lifts);
         
 	}
-
-
-    private View.OnClickListener onSave = new View.OnClickListener() {
-        public void onClick(View v) {
-            String newLift = inputLift.getText().toString();
-            if (!newLift.isEmpty()){
-                ContentValues values = new ContentValues();
-                values.put("liftname", newLift);
-                values.put("did", did);
-                writableDB.insert("Lifts", null, values);
-                arrayOfLifts.add(new Lift(SQLHelper.getLastLid(), did, newLift));
-                liftAdapter.notifyDataSetChanged();
-                inputLift.setText("");
+    private void setUpToolbar(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar); // Attaching the layout to the toolbar object
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Activity_Lifts.this, Activity_Days.class);
+                startActivity(intent);
             }
-        }
-    };
+        });
+        //toolbar.setLogo(R.drawable.icon114);
+    }
 
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -150,6 +145,46 @@ public class Activity_Lifts extends FragmentActivity {
         liftAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_tb_day_lift, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        switch (id){
+            case R.id.action_add:
+                AddLiftDialog addDayLiftDialog = new AddLiftDialog();
+                addDayLiftDialog.setCallback(new AddLiftDialog.AddLiftListener() {
+                    @Override
+                    public void onDialogPositiveClick(String newName) {
+                        if (!newName.isEmpty()){
+                /* Insert the new day into the database */
+                            ContentValues values = new ContentValues();
+                            values.put("liftname", newName);
+                            values.put("did", did);
+                            writableDB.insert("Lifts", null, values);
+                            arrayOfLifts.add(new Lift(SQLHelper.getLastLid(), did, newName));
+                            liftAdapter.notifyDataSetChanged();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "No text was provided", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+                addDayLiftDialog.show(this.getSupportFragmentManager(), "Add_Muscle");
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void deleteFromDatabase(Lift lift){
         //SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -182,18 +217,18 @@ public class Activity_Lifts extends FragmentActivity {
 
     @Override
     public void onPause() {
-        adsHelper.onPause();
+        //adsHelper.onPause();
         super.onPause();
     }
 
     public void onResume(){
-        adsHelper.onResume();
+        //adsHelper.onResume();
         super.onResume();
     }
 
     @Override
     public void onDestroy() {
-        adsHelper.onDestroy();
+        //adsHelper.onDestroy();
         super.onDestroy();
     }
 }

@@ -48,10 +48,10 @@ public class Activity_Days extends AppCompatActivity {
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_days_layout);
+        setContentView(R.layout.activity_lifts_days_layout);
 
-        adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_days),this);
-        adsHelper.runAds();
+        //adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_days),this);
+        //adsHelper.runAds();
 
         this.setUpToolbar();
 
@@ -207,23 +207,23 @@ public class Activity_Days extends AppCompatActivity {
     }
 
     private void findViews(){
-        lv_days = (ListView)findViewById(R.id.days);
+        lv_days = (ListView)findViewById(R.id.lv_days_lifts);
     }
 
     @Override
     public void onPause() {
-        adsHelper.onPause();
+        //adsHelper.onPause();
         super.onPause();
     }
 
     public void onResume(){
-        adsHelper.onResume();
+        //adsHelper.onResume();
         super.onResume();
     }
 
     @Override
     public void onDestroy() {
-        adsHelper.onDestroy();
+        //adsHelper.onDestroy();
         super.onDestroy();
     }
 }
