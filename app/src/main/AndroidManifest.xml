@@ -51,10 +51,12 @@
         </activity>
         <activity
             android:name="com.amazon.device.ads.AdActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".PastDates"
             android:label="@string/title_activity_past_dates" >
+        </activity>
+        <activity android:name=".Activity_TabHolder" >
         </activity>
     </application>
 

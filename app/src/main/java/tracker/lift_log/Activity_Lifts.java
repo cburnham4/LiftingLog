@@ -79,7 +79,7 @@ public class Activity_Lifts extends AppCompatActivity {
         lv_lifts.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Intent intent = new Intent(Activity_Lifts.this, Progress.class);
+                Intent intent = new Intent(Activity_Lifts.this, Activity_TabHolder.class);
                 Lift lift = liftAdapter.getItem(position);
                 intent.putExtra("LID", lift.getLid());
                 startActivity(intent);
