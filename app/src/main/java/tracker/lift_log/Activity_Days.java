@@ -52,7 +52,7 @@ public class Activity_Days extends AppCompatActivity {
 
         //adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_days),this);
         //adsHelper.runAds();
-
+        this.setTitle("Muscle Groups");
         this.setUpToolbar();
 
         this.instantiateDBHelpers();
