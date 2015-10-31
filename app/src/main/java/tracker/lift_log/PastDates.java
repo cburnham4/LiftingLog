@@ -76,12 +76,6 @@ public class PastDates extends Activity implements AdListener{
         }
     }
 
-    public void getLifts(){
-        aol = new ArrayList<String>();
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-    }
-
     private ArrayList<Item> generateData(){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         ArrayList<Item> items = new ArrayList<Item>();

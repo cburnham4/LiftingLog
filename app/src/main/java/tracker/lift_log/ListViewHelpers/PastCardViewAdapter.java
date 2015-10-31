@@ -6,19 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import tracker.lift_log.R;
 
 /**
  * Created by cvburnha on 10/31/2015.
  */
 public class PastCardViewAdapter extends RecyclerView.Adapter<PastCardViewAdapter.ViewHolder> {
-    public String[] mDataset;
+    public ArrayList<PastDay> pastDays;
 
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public PastCardViewAdapter(String[] myDataset) {
-        mDataset = myDataset;
+    public PastCardViewAdapter(ArrayList<PastDay> pastDays) {
+        this.pastDays = pastDays;
     }
 
     // Create new views (invoked by the layout manager)
@@ -41,16 +43,21 @@ public class PastCardViewAdapter extends RecyclerView.Adapter<PastCardViewAdapte
 
         // - get data from your itemsData at this position
         // - replace the contents of the view with that itemsData
+        String sets = "";
+        PastDay pastDay = pastDays.get(position);
+        for(Set set: pastDay.getSets()){
+            sets += ("Reps: "+set.getReps() +" Weight: " +set.getWeight() + " \n");
+        }
 
-        viewHolder.tvtinfo_text.setText(mDataset[position].toString());
-        viewHolder.tv_date.setText("HELLO");
+        viewHolder.tvtinfo_text.setText(sets +"");
+        viewHolder.tv_date.setText(pastDay.getDate()+"");
 
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return  pastDays.size();
     }
 
     // inner class to hold a reference to each item of RecyclerView
