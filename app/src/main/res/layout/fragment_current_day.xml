@@ -14,13 +14,11 @@
 
     <TextView
         android:id="@+id/BlackLine1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/max"
         android:maxHeight="@android:dimen/thumbnail_height"
-        android:background="#000000"
+        android:background="@color/black"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 
@@ -30,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/BlackLine1"
-        android:layout_above="@+id/addSetLayout">
+        android:layout_above="@+id/lin_addSetLayout">
     </ListView>
 
     <LinearLayout
@@ -39,12 +37,12 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
 
-        android:id="@+id/addSetLayout"
+        android:id="@+id/lin_addSetLayout"
         android:background="#E3F2FD"
         android:layout_above="@+id/ad_layout">
 
         <TextView
-            android:id="@+id/RepsLabel"
+            android:id="@+id/tv_repsLabel"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/reps"

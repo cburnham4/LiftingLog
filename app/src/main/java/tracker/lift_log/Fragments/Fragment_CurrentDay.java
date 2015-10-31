@@ -8,9 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -32,7 +35,8 @@ public class Fragment_CurrentDay extends Fragment {
     private SQLQueryHelper sqlQueryHelper;
     private SQLiteDatabase writableDB;
     private ArrayList<Set> sets;
-    private long set = 0;
+
+    private TextView tv_max;
 
     private ListView lv_sets;
     private SetsAdapter setsAdapter;
@@ -64,8 +68,8 @@ public class Fragment_CurrentDay extends Fragment {
         setsAdapter = new SetsAdapter(this.getContext(), sets);
         lv_sets.setAdapter(setsAdapter);
 
-        final TextView max = (TextView) view.findViewById(R.id.max);
-        max.setText("Calculated Max: " + getCalculatedMax(lid));
+        tv_max = (TextView) view.findViewById(R.id.max);
+        tv_max.setText("Calculated Max: " + getCalculatedMax(lid));
 
         Button addSet =(Button) view.findViewById(R.id.AddSet);
         Button addRep = (Button) view.findViewById(R.id.addRep);
@@ -118,15 +122,18 @@ public class Fragment_CurrentDay extends Fragment {
                     //-----------------------
                     int sid = sqlQueryHelper.getLastSid();
                     sets.add(new Set(sid, lid, weight, reps, formattedDate));
-                    //if(reps <= 6){
+                    /*
+                    TODO:
+                        Check if max would be greater first 
+                     */
 
                     setCalculatedMAX(sid, lid, weight, reps);
-                    max.setText("Calculated Max: " + getCalculatedMax(lid));
+                    tv_max.setText("Calculated Max: " + getCalculatedMax(lid));
                     setsAdapter.notifyDataSetChanged();
                 }
             }
         });
-
+        registerForContextMenu(lv_sets);
         return view;
     }
 
@@ -194,6 +201,31 @@ public class Fragment_CurrentDay extends Fragment {
         c.moveToFirst();
         int max = c.getInt(0);
         return max;
+    }
+
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getActivity().getMenuInflater().inflate(R.menu.menu_current, menu);
+    }
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch(item.getItemId()){
+            case R.id.deleteCurrent:
+                //Toast.makeText(this, "Deleted: " + adapter.getItem(info.position), Toast.LENGTH_SHORT).show();
+                deleteFromDatabase(sets.get(info.position));
+        }
+        return true;
+    }
+    private void deleteFromDatabase(Set set){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        int sid = set.getSid();
+        db.delete("Sets","sid = "+sid,null);
+        db.delete("Max","sid = "+sid,null);
+
+        sets.remove(set);
+
+        tv_max.setText("Calculated Max: "+getCalculatedMax(lid));
+        setsAdapter.notifyDataSetChanged();
     }
 
 
