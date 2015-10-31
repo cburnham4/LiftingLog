@@ -14,11 +14,8 @@ import tracker.lift_log.R;
  * A simple {@link Fragment} subclass.
  */
 public class Fragment_Graph extends Fragment {
+    private int lid;
 
-
-    public Fragment_Graph() {
-        // Required empty public constructor
-    }
 
 
     @Override

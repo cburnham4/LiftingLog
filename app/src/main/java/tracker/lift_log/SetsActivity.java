@@ -30,13 +30,12 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import HelperFiles.MyAdapter;
 
 public class SetsActivity extends Activity implements AdListener{
 	private LiftDatabase dbHelper;
 	private ArrayList<String> Sets;
 	private long set = 0;
-    private MyAdapter adapter;
+    //private MyAdapter adapter;
     private int lid;
     private ArrayList<Integer> sids;
 
@@ -62,14 +61,12 @@ public class SetsActivity extends Activity implements AdListener{
         TextView currentLift = (TextView)findViewById(R.id.currentLift);
         ListView setsList =(ListView)findViewById(R.id.setsList);
         Button addSet =(Button)findViewById(R.id.AddSet);
-		adapter =  new MyAdapter(this, Sets);
+		//adapter =  new MyAdapter(this, Sets);
         final TextView max = (TextView)findViewById(R.id.max);
         //-------------------------------------
-        //SET UP INITIAL VIEW
-        String liftName = getLiftName(lid);
 
-		setsList.setAdapter(adapter);
-		adapter.notifyDataSetChanged();
+		//setsList.setAdapter(adapter);
+		//adapter.notifyDataSetChanged();
 		max.setText("Calculated Max: "+getCalculatedMax(lid) );
 
         //GET VIEWS
@@ -127,7 +124,7 @@ public class SetsActivity extends Activity implements AdListener{
                     sids.add(sid);
                     setCalculatedMAX(sid, lid, weight, reps);
                     max.setText("Calculated Max: "+getCalculatedMax(lid));
-                    adapter.notifyDataSetChanged();
+                    //adapter.notifyDataSetChanged();
                 }
             }
         });
@@ -144,17 +141,7 @@ public class SetsActivity extends Activity implements AdListener{
             }
         }, delay, period);
 	}
-	
-	private String getLiftName(int lid){
-		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		String[] projection = {"liftname"};
-		Cursor c = db.query("Lifts", projection, "lid ="+ lid, null,  null,null,null);
-		c.moveToFirst();
-		if (c.isAfterLast() == false){
-			return c.getString(0);
-		}
-		return "";
-	}
+
     private void setCalculatedMAX(int sid, int lid, int weight, int reps){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         double calculatedMax = getCalculatedMax(lid);
@@ -227,7 +214,7 @@ public class SetsActivity extends Activity implements AdListener{
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch(item.getItemId()){
             case R.id.deleteCurrent:
-                Toast.makeText(this, "Deleted: " + adapter.getItem(info.position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Deleted: " + adapter.getItem(info.position), Toast.LENGTH_SHORT).show();
                 deleteFromDatabase(info.position);
         }
         return true;
@@ -244,7 +231,7 @@ public class SetsActivity extends Activity implements AdListener{
         sids.remove((Integer) sid);
         TextView max = (TextView)findViewById(R.id.max);
         max.setText("Calculated Max: "+getCalculatedMax(lid));
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
     }
     private int getLastSid(){
         SQLiteDatabase db = dbHelper.getWritableDatabase();

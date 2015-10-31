@@ -1,7 +1,16 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="tracker.lift_log.Fragments.Fragment_CurrentDay">
+
+    <TextView
+        android:id="@+id/max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/toolbar"
+        android:text="Calculated Max"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/BlackLine1"
@@ -14,14 +23,7 @@
         android:background="#000000"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
-        android:id="@+id/max"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/currentLift"
-        android:text="Calculated Max"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+
 
     <ListView
         android:id="@+id/setsList"
@@ -39,7 +41,7 @@
 
         android:id="@+id/addSetLayout"
         android:background="#E3F2FD"
-        android:layout_above="@+id/AdLayoutAddSet">
+        android:layout_above="@+id/ad_layout">
 
         <TextView
             android:id="@+id/RepsLabel"
@@ -144,4 +146,4 @@
     </LinearLayout>
 <include layout="@layout/ad_layout"></include>
 
-</FrameLayout>
+</RelativeLayout>

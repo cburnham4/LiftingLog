@@ -1,5 +1,6 @@
 package tracker.lift_log;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,6 +23,8 @@ public class Activity_TabHolder extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
+    private int lid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,8 @@ public class Activity_TabHolder extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Intent recievedIntent = getIntent();
+        lid = recievedIntent.getIntExtra("LID", 0);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -41,9 +46,20 @@ public class Activity_TabHolder extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Fragment_CurrentDay(), "Current Day");
-        adapter.addFragment(new Fragment_PastDates(), "Past Days");
-        adapter.addFragment(new Fragment_Graph(), "Graph");
+
+        Fragment fragment_currentday = new Fragment_CurrentDay();
+        Fragment fragment_pastdates = new Fragment_PastDates();
+        Fragment fragment_graph = new Fragment_Graph();
+
+        Bundle args = new Bundle();
+        args.putInt("lid", lid);
+        fragment_currentday.setArguments(args);
+        fragment_pastdates.setArguments(args);
+        fragment_graph.setArguments(args);
+
+        adapter.addFragment(fragment_currentday, "Current Day");
+        adapter.addFragment(fragment_pastdates, "Past Days");
+        adapter.addFragment(fragment_graph, "Graph");
         viewPager.setAdapter(adapter);
     }
 
