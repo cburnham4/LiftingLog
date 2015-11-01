@@ -44,7 +44,7 @@ public class PastDates extends Activity implements AdListener{
         //USE DATABASE
         dbHelper = new LiftDatabase(getBaseContext());
         getDates();
-        getLifts();
+
 
         dateConverter = new DateConverter();
 
