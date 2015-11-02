@@ -80,7 +80,7 @@ public class Fragment_Graph extends Fragment {
         TextView maxView = (TextView) view.findViewById(R.id.Max);
         TextView occuredOnView = (TextView) view.findViewById(R.id.Occured_On);
 
-        maxView.setText("Max: "+ max);
+        maxView.setText("Max: "+ (int) max);
         if(maxDate!=null){
             occuredOnView.setText("Occured on: " + dc.convertDateToText(maxDate));
         }
@@ -143,7 +143,7 @@ public class Fragment_Graph extends Fragment {
                 + "Where lid = "+lid+""
                 , null);
         c.moveToFirst();
-        double max = c.getDouble(0);
+         max = c.getDouble(0);
         maxDate = c.getString(1);
         return max;
     }
