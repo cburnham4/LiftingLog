@@ -94,6 +94,7 @@ public class Activity_Graph extends Activity implements AdListener{
         ArrayList<Integer> maxes = new ArrayList<Integer>();
         dates = new ArrayList<>();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
         c.moveToFirst();
         while (c.isAfterLast() == false){
             maxes.add(c.getInt(0));
@@ -123,6 +124,7 @@ public class Activity_Graph extends Activity implements AdListener{
                 PointsGraphSeries<DataPoint> series3 = new PointsGraphSeries<DataPoint>(new DataPoint[] {
                         new DataPoint(dates.get(0), maxIfOne),
                 });
+
                 graph.addSeries(series3);
                 series3.setShape(PointsGraphSeries.Shape.TRIANGLE);
 
