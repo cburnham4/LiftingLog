@@ -10,18 +10,23 @@
     card_view:cardUseCompatPadding="true">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/tv_cardview_date"
             android:textColor="@color/black"
-            android:background="@color/primaryLight"/>
+            android:textSize="18dp"
+            android:background="@color/primaryLight"
+            android:padding="3dp"/>
         <TextView
             android:id="@+id/info_text"
             android:layout_width="match_parent"
+            android:layout_margin="3dp"
             android:layout_height="match_parent"
+            android:textColor="@color/black"
             android:layout_below="@id/tv_cardview_date"
             android:layout_gravity="bottom" />
     </RelativeLayout>

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import HelperFiles.DateConverter;
 import HelperFiles.Item;
+import tracker.lift_log.AdsHelper;
 import tracker.lift_log.LiftDatabase;
 import tracker.lift_log.ListViewHelpers.PastCardViewAdapter;
 import tracker.lift_log.ListViewHelpers.PastDay;
@@ -37,6 +38,7 @@ public class Fragment_PastDates extends Fragment {
     private ArrayList<PastDay> pastDates;
     private ArrayList<String> dates;
 
+    private AdsHelper adsHelper;
     private int lid;
 
     @Override
@@ -52,7 +54,8 @@ public class Fragment_PastDates extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_past_dates, container, false);
-
+        adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_days),this.getActivity());
+        adsHelper.runAds();
         dbHelper = new LiftDatabase(getContext());
         dateConverter = new DateConverter();
         this.getDates();
@@ -109,6 +112,23 @@ public class Fragment_PastDates extends Fragment {
             dates.add(c.getString(0));
             c.moveToNext();
         }
+    }
+
+    @Override
+    public void onPause() {
+        adsHelper.onPause();
+        super.onPause();
+    }
+
+    public void onResume(){
+        adsHelper.onResume();
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        adsHelper.onDestroy();
+        super.onDestroy();
     }
 
 

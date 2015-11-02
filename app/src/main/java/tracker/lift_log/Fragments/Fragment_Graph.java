@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import HelperFiles.DateConverter;
+import tracker.lift_log.AdsHelper;
 import tracker.lift_log.LiftDatabase;
 import tracker.lift_log.R;
 
@@ -42,6 +43,7 @@ public class Fragment_Graph extends Fragment {
 
     private String maxDate;
 
+    private AdsHelper adsHelper;
     private DataPoint[] dataPoints;
 
     double max;
@@ -59,6 +61,8 @@ public class Fragment_Graph extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_graph, container, false);
 
+        adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_days),this.getActivity());
+        adsHelper.runAds();
         dbHelper = new LiftDatabase(getContext());
         readableDatabase = dbHelper.getReadableDatabase();
 
@@ -146,6 +150,23 @@ public class Fragment_Graph extends Fragment {
          max = c.getDouble(0);
         maxDate = c.getString(1);
         return max;
+    }
+
+    @Override
+    public void onPause() {
+        adsHelper.onPause();
+        super.onPause();
+    }
+
+    public void onResume(){
+        adsHelper.onResume();
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        adsHelper.onDestroy();
+        super.onDestroy();
     }
 
 

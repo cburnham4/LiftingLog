@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import HelperFiles.SQLQueryHelper;
+import tracker.lift_log.AdsHelper;
 import tracker.lift_log.LiftDatabase;
 import tracker.lift_log.ListViewHelpers.Set;
 import tracker.lift_log.ListViewHelpers.SetsAdapter;
@@ -40,6 +41,8 @@ public class Fragment_CurrentDay extends Fragment {
 
     private ListView lv_sets;
     private SetsAdapter setsAdapter;
+
+    private AdsHelper adsHelper;
     private int lid;
 
     @Override
@@ -54,6 +57,9 @@ public class Fragment_CurrentDay extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_current_day, container, false);
+
+        adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_days),this.getActivity());
+        adsHelper.runAds();
 
         dbHelper = new LiftDatabase(getContext());
         writableDB = dbHelper.getWritableDatabase();
@@ -219,13 +225,31 @@ public class Fragment_CurrentDay extends Fragment {
     private void deleteFromDatabase(Set set){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int sid = set.getSid();
-        db.delete("Sets","sid = "+sid,null);
+        db.delete("Sets", "sid = " + sid, null);
         db.delete("Max","sid = "+sid,null);
 
         sets.remove(set);
 
         tv_max.setText("Calculated Max: "+getCalculatedMax(lid));
         setsAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onPause() {
+        adsHelper.onPause();
+        super.onPause();
+    }
+
+    public void onResume(){
+        adsHelper.onResume();
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        adsHelper.onDestroy();
+        super.onDestroy();
     }
 
 
