@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -85,6 +86,9 @@ public class Fragment_CurrentDay extends Fragment {
         final EditText repCount = (EditText) view.findViewById(R.id.Reps);
         final EditText weightCount = (EditText) view.findViewById(R.id.Weight);
 
+        /* Todo
+            limit the numbers to positive and acutally there
+         */
         addRep.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int rep = Integer.parseInt(repCount.getText().toString());
@@ -163,6 +167,9 @@ public class Fragment_CurrentDay extends Fragment {
         }
     }
     private void setCalculatedMAX(int sid, int lid, int weight, int reps){
+        /* TODO
+        add max for 6 + reps
+         */
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         double calculatedMax = getCalculatedMax(lid);
         double m = 0.0;
@@ -243,6 +250,7 @@ public class Fragment_CurrentDay extends Fragment {
 
     public void onResume(){
         adsHelper.onResume();
+        //Toast.makeText(this.getContext(), "RESUME", Toast.LENGTH_SHORT).show();
         super.onResume();
     }
 

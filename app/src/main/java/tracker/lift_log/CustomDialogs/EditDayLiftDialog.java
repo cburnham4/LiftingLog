@@ -17,7 +17,7 @@ import tracker.lift_log.R;
 public class EditDayLiftDialog extends DialogFragment {
 
 
-
+ /* TODO  Create four dialogs */
     String name;
 
     public interface EditDayLiftListener {
@@ -49,9 +49,6 @@ public class EditDayLiftDialog extends DialogFragment {
                 .setPositiveButton("FINISH", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        /*TODO
-                        complete this with a callback
-                         */
                         String newName = et_item_name.getText().toString();
                         mListener.onDialogPositiveClick(EditDayLiftDialog.this, newName);
                     }

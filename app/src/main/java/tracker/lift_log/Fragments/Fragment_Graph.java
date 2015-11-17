@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
@@ -105,6 +106,9 @@ public class Fragment_Graph extends Fragment {
         }
     }
 
+    /* TODO
+        create graph for month year all time
+     */
     private void createGraph(LineGraphSeries<DataPoint> series, int maxIfOne){
 
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this.getContext()));
@@ -160,6 +164,7 @@ public class Fragment_Graph extends Fragment {
 
     public void onResume(){
         adsHelper.onResume();
+
         super.onResume();
     }
 

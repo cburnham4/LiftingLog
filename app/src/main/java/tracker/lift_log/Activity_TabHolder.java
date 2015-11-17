@@ -23,6 +23,10 @@ public class Activity_TabHolder extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
+    /* TODO add slim toolbar */
+
+    /* TODO Add fragment lifecycle */
+
     private int lid;
 
     @Override

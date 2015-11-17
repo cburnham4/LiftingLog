@@ -50,9 +50,6 @@ public class AddLiftDialog extends DialogFragment {
                 .setPositiveButton("ADD", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        /*TODO
-                        complete this with a callback
-                         */
                         String newName = et_item_name.getText().toString();
                         mListener.onDialogPositiveClick(newName);
                     }

@@ -6,19 +6,26 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="Weight: "
-        android:id="@+id/tv_weight_static"/>
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:id="@+id/tv_weight_label"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="1dp"
         android:text=""
         android:id="@+id/tv_itemweight"
-        android:layout_toRightOf="@id/tv_weight_static"/>
+        android:layout_toRightOf="@id/tv_weight_label"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_reps_static"
+        android:id="@+id/tv_reps_label"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@id/tv_itemweight"
         android:text="Reps: "/>
 
@@ -27,12 +34,18 @@
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/tv_itemreps"
-        android:layout_toRightOf="@+id/tv_reps_static"/>
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="1dp"
+        android:layout_toRightOf="@+id/tv_reps_label"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/tv_itemreps"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="40dp"
         android:text=""
         android:id="@+id/tv_itemdate"/>
 
