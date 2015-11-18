@@ -63,7 +63,7 @@ public class Fragment_Graph extends Fragment {
         View view = inflater.inflate(R.layout.fragment_graph, container, false);
 
         adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_days),this.getActivity());
-        adsHelper.runAds();
+        //adsHelper.runAds();
         dbHelper = new LiftDatabase(getContext());
         readableDatabase = dbHelper.getReadableDatabase();
 

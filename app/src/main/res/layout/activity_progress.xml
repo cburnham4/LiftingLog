@@ -62,25 +62,5 @@
         </LinearLayout>
     </TabHost>
 
-    <!--<LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal"
-        android:id="@+id/AdLayoutProgress"
-        android:background="@android:color/holo_blue_dark">
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_on_days">
-        </com.google.android.gms.ads.AdView>
-    </LinearLayout>-->
 
 </RelativeLayout>

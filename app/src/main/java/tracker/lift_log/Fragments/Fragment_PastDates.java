@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -56,7 +55,7 @@ public class Fragment_PastDates extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_past_dates, container, false);
         adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_days),this.getActivity());
-        adsHelper.runAds();
+        //adsHelper.runAds();
         dbHelper = new LiftDatabase(getContext());
         dateConverter = new DateConverter();
         this.getDates();
@@ -123,7 +122,7 @@ public class Fragment_PastDates extends Fragment {
 
     public void onResume(){
         adsHelper.onResume();
-        Toast.makeText(this.getContext(), "RESUME", Toast.LENGTH_SHORT).show();
+
         super.onResume();
     }
 

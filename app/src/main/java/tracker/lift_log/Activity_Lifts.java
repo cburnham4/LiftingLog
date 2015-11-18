@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import HelperFiles.SQLQueryHelper;
 
@@ -54,8 +56,7 @@ public class Activity_Lifts extends AppCompatActivity {
 
         this.setUpToolbar();
 
-        adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_lifts),this);
-        adsHelper.runAds();
+
 
         this.setTitle("Muscle Group: "+recievedIntent.getStringExtra("DAY_NAME"));
         //TextView textView = (TextView) findViewById(R.id.liftName);
@@ -79,7 +80,7 @@ public class Activity_Lifts extends AppCompatActivity {
         lv_lifts.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Intent intent = new Intent(Activity_Lifts.this, Activity_TabHolder.class);
+                Intent intent = new Intent(Activity_Lifts.this, Activity_Tabs.class);
                 Lift lift = liftAdapter.getItem(position);
                 intent.putExtra("LID", lift.getLid());
                 startActivity(intent);
@@ -87,6 +88,17 @@ public class Activity_Lifts extends AppCompatActivity {
         });
 
         registerForContextMenu(lv_lifts);
+
+        adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_lifts),this);
+        adsHelper.setUpAds();
+        int delay = 1000; // delay for 1 sec.
+        int period = getResources().getInteger(R.integer.ad_refresh_rate);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                adsHelper.refreshAd();  // display the data
+            }
+        }, delay, period);
         
 	}
     private void setUpToolbar(){

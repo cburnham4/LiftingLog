@@ -27,11 +27,6 @@ public class Activity_Tabs extends Activity{
         TextView currentLift = (TextView)findViewById(R.id.currentLift);
         currentLift.setText("Current Lift: "+liftName);
 
-        /**
-         * AD Setup are
-         */
-        // this.setUpAds();
-
         TabHost tabHost = (TabHost)findViewById(R.id.tabHost);
         LocalActivityManager mLocalActivityManager = new LocalActivityManager(this, false);
         mLocalActivityManager.dispatchCreate(savedInstanceState);

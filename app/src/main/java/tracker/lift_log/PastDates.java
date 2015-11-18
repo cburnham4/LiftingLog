@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
@@ -130,6 +131,7 @@ public class PastDates extends Activity implements AdListener{
     @Override
     public void onAdFailedToLoad(Ad ad, AdError adError) {
         // Call AdMob SDK for backfill
+        Log.e("AD ERROR", adError.getCode() + ": " + adError.getMessage());
         if (amazonAdEnabled)
         {
             amazonAdEnabled = false;

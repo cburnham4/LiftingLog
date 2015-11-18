@@ -20,6 +20,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import HelperFiles.SQLQueryHelper;
 import tracker.lift_log.CustomDialogs.AddDayDialog;
@@ -50,8 +52,7 @@ public class Activity_Days extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lifts_days_layout);
 
-        adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_days),this);
-        adsHelper.runAds();
+
         this.setTitle("Muscle Groups");
         this.setUpToolbar();
 
@@ -79,6 +80,17 @@ public class Activity_Days extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_days),this);
+        adsHelper.setUpAds();
+        int delay = 1000; // delay for 1 sec.
+        int period = getResources().getInteger(R.integer.ad_refresh_rate);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                adsHelper.refreshAd();  // display the data
+            }
+        }, delay, period);
 
 
     }

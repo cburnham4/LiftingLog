@@ -60,7 +60,7 @@ public class Fragment_CurrentDay extends Fragment {
         View view = inflater.inflate(R.layout.fragment_current_day, container, false);
 
         adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_days),this.getActivity());
-        adsHelper.runAds();
+        //adsHelper.runAds();
 
         dbHelper = new LiftDatabase(getContext());
         writableDB = dbHelper.getWritableDatabase();
