@@ -36,7 +36,7 @@ import tracker.lift_log.ListViewHelpers.Set;
 import tracker.lift_log.ListViewHelpers.SetsAdapter;
 
 
-public class SetsActivity extends AppCompatActivity{
+public class Activity_InputSet extends Activity{
     private LiftDatabase dbHelper;
     private SQLQueryHelper sqlQueryHelper;
     private SQLiteDatabase writableDB;
@@ -53,10 +53,6 @@ public class SetsActivity extends AppCompatActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sets_layout);
-
-        //GET DATABASE
-       // adsHelper = new AdsHelper(getWindow().findViewById(android.R.id.content), getResources().getString(R.string.banner_ad_on_inputset),this);
-       // adsHelper.runAds();
 
         Intent recievedIntent = getIntent();
         lid = recievedIntent.getIntExtra("LID", 0);
@@ -143,7 +139,19 @@ public class SetsActivity extends AppCompatActivity{
             }
         });
         registerForContextMenu(lv_sets);
-	}
+
+        adsHelper = new AdsHelper(getWindow().findViewById(android.R.id.content), getResources().getString(R.string.banner_ad_on_inputset),this);
+        adsHelper.setUpAds();
+        int delay = 1000; // delay for 1 sec.
+        int period = getResources().getInteger(R.integer.ad_refresh_rate);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                adsHelper.refreshAd();  // display the data
+            }
+        }, delay, period);
+
+    }
 
     private void loadCurrentDay(int lid){
         sets= new ArrayList<>();
@@ -256,6 +264,11 @@ public class SetsActivity extends AppCompatActivity{
     public void onDestroy() {
         adsHelper.onDestroy();
         super.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //No call for super(). Bug on API Level > 11.
     }
 	
 	

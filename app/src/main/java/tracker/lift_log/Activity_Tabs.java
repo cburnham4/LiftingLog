@@ -33,7 +33,7 @@ public class Activity_Tabs extends Activity{
         tabHost.setup(mLocalActivityManager);
 
         TabSpec spec1 =tabHost.newTabSpec("tab1");
-        Intent intent1 = new Intent(this, SetsActivity.class);
+        Intent intent1 = new Intent(this, Activity_InputSet.class);
         intent1.putExtra("LID", lid);
         spec1.setContent(intent1);//
         spec1.setIndicator("Current Day");

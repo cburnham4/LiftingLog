@@ -29,7 +29,7 @@
             android:label="@string/title_activity_lifts" >
         </activity>
         <activity
-            android:name=".SetsActivity"
+            android:name=".Activity_InputSet"
             android:label="@string/title_activity_sets" >
         </activity>
         <activity
