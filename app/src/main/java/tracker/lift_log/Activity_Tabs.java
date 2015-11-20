@@ -32,6 +32,8 @@ public class Activity_Tabs extends Activity{
         mLocalActivityManager.dispatchCreate(savedInstanceState);
         tabHost.setup(mLocalActivityManager);
 
+
+
         TabSpec spec1 =tabHost.newTabSpec("tab1");
         Intent intent1 = new Intent(this, Activity_InputSet.class);
         intent1.putExtra("LID", lid);
@@ -55,7 +57,10 @@ public class Activity_Tabs extends Activity{
         spec3.setIndicator("Progress Graph");
         tabHost.addTab(spec3);
 
+        for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
+            tabHost.getTabWidget().getChildAt(i).getLayoutParams().height /= 1.4;
 
+        }
     }
 
     private String getLiftName(int lid){

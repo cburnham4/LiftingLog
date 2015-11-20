@@ -62,9 +62,6 @@ public class Fragment_PastDates extends Fragment {
         this.generateData();
 
 
-
-
-
         rv_pastdates = (RecyclerView) view.findViewById(R.id.my_recycler_view);
 
         // use a linear layout manager

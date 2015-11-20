@@ -39,7 +39,9 @@ public class PastDates extends Activity{
     private AdsHelper adsHelper;
     private int lid;
 
-
+    /*
+        Todo be able to delete it 
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
