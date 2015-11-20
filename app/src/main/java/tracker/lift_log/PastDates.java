@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -18,32 +20,52 @@ import java.util.TimerTask;
 import HelperFiles.DateConverter;
 import HelperFiles.Item;
 import HelperFiles.PastDateAdapter;
+import tracker.lift_log.ListViewHelpers.PastCardViewAdapter;
+import tracker.lift_log.ListViewHelpers.PastDay;
+import tracker.lift_log.ListViewHelpers.Set;
 
 
 public class PastDates extends Activity{
-    private int lid;
-    LiftDatabase dbHelper;
-    ArrayList<String> aod;
-    ArrayList<String> aol;
-    DateConverter dateConverter;
+    private RecyclerView rv_pastdates;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    private LiftDatabase dbHelper;
+    private DateConverter dateConverter;
+
+    private ArrayList<PastDay> pastDates;
+    private ArrayList<String> dates;
+
     private AdsHelper adsHelper;
+    private int lid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_past_dates);
+
         Intent recievedIntent = getIntent();
         lid = recievedIntent.getIntExtra("LID", 0);
         //USE DATABASE
         dbHelper = new LiftDatabase(getBaseContext());
-        getDates();
-
 
         dateConverter = new DateConverter();
 
-        PastDateAdapter adapter = new PastDateAdapter(this, generateData());
-        ListView listView = (ListView) findViewById(R.id.listViewPast);
-        listView.setAdapter(adapter);
+        this.getDates();
+        this.generateData();
+
+
+
+        rv_pastdates = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        rv_pastdates.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new PastCardViewAdapter(pastDates);
+        rv_pastdates.setAdapter(mAdapter);
 
         adsHelper = new AdsHelper(getWindow().findViewById(android.R.id.content), getResources().getString(R.string.banner_ad_on_pastlifts),this);
         adsHelper.setUpAds();
@@ -59,33 +81,38 @@ public class PastDates extends Activity{
     }
 
     public void getDates(){
-        aod = new ArrayList<String>();
+        dates = new ArrayList<String>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String sql  = "SELECT distinct date_Created FROM Sets WHERE lid = +"+lid+ " ORDER BY date_Created desc";
         Cursor c = db.rawQuery(sql, null);
         c.moveToFirst();
         while (c.isAfterLast() == false) {
-            aod.add(c.getString(0));
+            dates.add(c.getString(0));
             c.moveToNext();
         }
     }
 
-    private ArrayList<Item> generateData(){
+    private void generateData(){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        ArrayList<Item> items = new ArrayList<Item>();
-        for(int i=0; i <aod.size();i++){
-            String sql  = "SELECT weight, reps FROM Sets WHERE lid = +"+lid+ " and date_Created = '"+aod.get(i)+"'";
+        pastDates = new ArrayList<>();
+        for(int i=0; i <dates.size();i++){
+            ArrayList<Set> sets = new ArrayList<>();
+            /* TODO
+             redo query
+             */
+            String sql  = "SELECT weight, reps FROM Sets WHERE lid = +"+lid+ " and date_Created = '"+dates.get(i)+"'";
             Cursor c = db.rawQuery(sql, null);
             c.moveToFirst();
             String pastLift ="";
             while (c.isAfterLast() == false) {
-                pastLift += "Reps: " +c.getString(1) +" Weight: "+c.getString(0)+"\n";
+                sets.add(new Set(0, lid, c.getInt(0), c.getInt(1), dates.get(i)));
                 c.moveToNext();
             }
-            String date = dateConverter.convertDateToText(aod.get(i));
-            items.add(new Item(date,pastLift));
+            PastDay pastDay = new PastDay(sets, dateConverter.convertDateToText(dates.get(i)));
+
+            pastDates.add(pastDay);
 
         }
-        return items;
+
     }
 }

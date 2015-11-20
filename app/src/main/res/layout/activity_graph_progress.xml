@@ -22,16 +22,7 @@
         android:layout_below="@+id/Max"
         android:textSize="20dp" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal"
-        android:id="@+id/AdLayoutGraph"
-        android:background="@android:color/holo_blue_dark">
-    </LinearLayout>
+    <include layout="@layout/ad_layout"></include>
 
 
 </RelativeLayout>

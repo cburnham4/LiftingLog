@@ -30,19 +30,16 @@ import java.util.TimerTask;
 
 import HelperFiles.DateConverter;
 
-public class Activity_Graph extends Activity implements AdListener{
+public class Activity_Graph extends Activity{
     String maxDate;
     ArrayList<Date> dates;
-    private ViewGroup adViewContainer;
-    private com.amazon.device.ads.AdLayout amazonAdView;
-    private com.google.android.gms.ads.AdView admobAdView;
-    private boolean amazonAdEnabled;
+
+    private AdsHelper adsHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //SET UP CLASS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_progress);
-        this.setUpAds();
 
         LiftDatabase dbHelper = new LiftDatabase(getBaseContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -74,14 +71,14 @@ public class Activity_Graph extends Activity implements AdListener{
             occuredOnView.setText("Occured on: "+ dc.convertDateToText(maxDate));
         }
 
+        adsHelper = new AdsHelper(getWindow().findViewById(android.R.id.content), getResources().getString(R.string.banner_ad_on_pastlifts),this);
+        adsHelper.setUpAds();
         int delay = 1000; // delay for 1 sec.
         int period = getResources().getInteger(R.integer.ad_refresh_rate);
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask()
-        {
-            public void run()
-            {
-                refreshAd();  // display the data
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                adsHelper.refreshAd();  // display the data
             }
         }, delay, period);
 
@@ -106,7 +103,7 @@ public class Activity_Graph extends Activity implements AdListener{
 
     private DataPoint[] createDataPoints(ArrayList<Integer> maxes){
         DataPoint[] dps = new DataPoint[maxes.size()];//maxes.size()
-        Log.i("MAX SIZE", maxes.size()+"");
+        Log.i("MAX SIZE", maxes.size() + "");
         for(int i = 0; i<maxes.size(); i++){//maxes.size()
             Log.i("Date", dates.get(i)+"");
             dps[i] = new DataPoint(dates.get(i), maxes.get(i));
@@ -153,93 +150,15 @@ public class Activity_Graph extends Activity implements AdListener{
 
     }
 
-    private double getCalculatedMax(int lid, SQLiteDatabase db){
+    private double getCalculatedMax(int lid, SQLiteDatabase db) {
         Cursor c = db.rawQuery("SELECT MAX(maxWeight), date_Lifted "
                 + "From Max "
-                + "Where lid = "+lid+""
+                + "Where lid = " + lid + ""
                 , null);
         c.moveToFirst();
         int max = c.getInt(0);
         maxDate = c.getString(1);
-        Log.i("MAX: ", max+"");
+        Log.i("MAX: ", max + "");
         return max;
-    }
-
-    private void setUpAds(){
-        AdRegistration.setAppKey(getString(R.string.amazon_ad_id));
-        amazonAdView = new com.amazon.device.ads.AdLayout(this, com.amazon.device.ads.AdSize.SIZE_320x50);
-        amazonAdView.setListener(this);
-        //AdRegistration.enableTesting(true);
-        admobAdView = new com.google.android.gms.ads.AdView(this);
-        admobAdView.setAdSize(com.google.android.gms.ads.AdSize.BANNER);
-        admobAdView.setAdUnitId(getString(R.string.banner_ad_on_graph));
-
-        // Initialize view container
-        adViewContainer = (ViewGroup)findViewById(R.id.AdLayoutGraph);
-        amazonAdEnabled = true;
-        adViewContainer.addView(amazonAdView);
-
-        amazonAdView.loadAd(new com.amazon.device.ads.AdTargetingOptions());
-    }
-
-
-    public void refreshAd()
-    {
-        amazonAdView.loadAd(new com.amazon.device.ads.AdTargetingOptions());
-    }
-
-    @Override
-    public void onAdLoaded(Ad ad, AdProperties adProperties) {
-        if (!amazonAdEnabled)
-        {
-            amazonAdEnabled = true;
-            adViewContainer.removeView(admobAdView);
-            adViewContainer.addView(amazonAdView);
-        }
-    }
-
-    @Override
-    public void onAdFailedToLoad(Ad ad, AdError adError) {
-        // Call AdMob SDK for backfill
-        if (amazonAdEnabled)
-        {
-            amazonAdEnabled = false;
-            adViewContainer.removeView(amazonAdView);
-            adViewContainer.addView(admobAdView);
-        }
-//        AdRequest.Builder.addTestDevice("04CD51A7A1F806B7F55CADD6A3B84E92");
-        admobAdView.loadAd((new com.google.android.gms.ads.AdRequest.Builder()).build());
-    }
-
-    @Override
-    public void onAdExpanded(Ad ad) {
-
-    }
-
-    @Override
-    public void onAdCollapsed(Ad ad) {
-
-    }
-
-    @Override
-    public void onAdDismissed(Ad ad) {
-
-    }
-
-    @Override
-    public void onDestroy()
-    {
-        super.onDestroy();
-        this.amazonAdView.destroy();
-    }
-
-    public void onPause(){
-        super.onPause();
-        this.amazonAdView.destroy();
-    }
-
-    public void onResume(){
-        super.onResume();
-        this.setUpAds();
     }
 }
