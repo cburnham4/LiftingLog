@@ -15,7 +15,7 @@
         android:text="Current Lift: "
         android:textColor="@color/white"
         android:textIsSelectable="false"
-        android:background="@color/primaryDark"
+        android:background="@color/primary"
         android:textSize="20dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textStyle="bold" />
