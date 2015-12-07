@@ -46,7 +46,7 @@ public class PastCardViewAdapter extends RecyclerView.Adapter<PastCardViewAdapte
         String sets = "";
         PastDay pastDay = pastDays.get(position);
         for(Set set: pastDay.getSets()){
-            sets += ("Reps: "+set.getReps() +" Weight: " +set.getWeight() + " \n");
+            sets += ("Reps: "+set.getReps() +"   Weight: " +set.getWeight() + " \n");
         }
 
         viewHolder.tvtinfo_text.setText(sets +"");
