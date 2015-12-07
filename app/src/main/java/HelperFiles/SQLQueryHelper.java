@@ -23,6 +23,7 @@ public class SQLQueryHelper {
         String sql = "SELECT Max(did) FROM Days";
         Cursor c = db.rawQuery(sql, null);
         c.moveToFirst();
+
         return c.getInt(0);
     }
     public int getLastLid(){

@@ -5,9 +5,8 @@
     android:layout_gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    card_view:cardCornerRadius="5dp"
-    card_view:cardUseCompatPadding="true">
+    android:orientation="horizontal">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,15 +18,23 @@
             android:id="@+id/tv_cardview_date"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:background="@color/primaryLight"
+
             android:padding="3dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/primaryAccent"
+            android:layout_below="@id/tv_cardview_date"
+            android:id="@+id/tv_seperator"
+            />
         <TextView
             android:id="@+id/info_text"
             android:layout_width="match_parent"
             android:layout_margin="3dp"
             android:layout_height="match_parent"
             android:textColor="@color/black"
-            android:layout_below="@id/tv_cardview_date"
+            android:layout_below="@id/tv_seperator"
             android:layout_gravity="bottom" />
     </RelativeLayout>
 

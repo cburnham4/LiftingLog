@@ -1,5 +1,7 @@
 package tracker.lift_log.ListViewHelpers;
 
+
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

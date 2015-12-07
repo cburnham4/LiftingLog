@@ -110,6 +110,7 @@ public class Activity_Lifts extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Activity_Lifts.this, Activity_Days.class);
                 startActivity(intent);
+
             }
         });
         //toolbar.setLogo(R.drawable.icon114);
