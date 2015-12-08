@@ -10,6 +10,7 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primaryDark</item>
         <item name="colorAccent">@color/primaryAccent</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>

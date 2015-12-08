@@ -22,4 +22,5 @@
     <color name="primaryLight">#E3F2FD</color>
     <color name="primaryAccent">#82B1FF</color>
     <color name="addsub_layout">#90CAF9</color>
+    <color name="tv_graph_background">#64B5F6</color>
 </resources>
