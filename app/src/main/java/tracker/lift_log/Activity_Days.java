@@ -32,7 +32,7 @@ import tracker.lift_log.ListViewHelpers.DaysAdapter;
 public class Activity_Days extends AppCompatActivity {
     private ArrayList<Day> arrayOfDays;
 
-	private LiftDatabase dbHelper; //The db helper that links to the sqlite db
+	private LiftDatabaseHelper dbHelper; //The db helper that links to the sqlite db
     SQLiteDatabase writableDB; //Database
 
     private DaysAdapter daysAdapter; //adapter used for list view
@@ -213,7 +213,7 @@ public class Activity_Days extends AppCompatActivity {
 	}
 
     private void instantiateDBHelpers(){
-        dbHelper = new LiftDatabase(getBaseContext());
+        dbHelper = new LiftDatabaseHelper(getBaseContext());
         SQLHelper = new SQLQueryHelper(getBaseContext());
         writableDB = dbHelper.getWritableDatabase();
     }

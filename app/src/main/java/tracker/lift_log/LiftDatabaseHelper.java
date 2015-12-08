@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class LiftDatabase extends SQLiteOpenHelper {
+public class LiftDatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 3;
     private  static final String DATABASE_NAME ="LiftDatabase.db";
@@ -46,7 +46,7 @@ public class LiftDatabase extends SQLiteOpenHelper {
     private final Context myContext;
     public SQLiteDatabase dbSqlite;
 
-    public LiftDatabase(Context context) {
+    public LiftDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.myContext = context;
     }

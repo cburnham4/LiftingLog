@@ -34,7 +34,7 @@ public class Activity_Lifts extends AppCompatActivity {
     private ArrayList<Lift> arrayOfLifts;
 
     private SQLQueryHelper SQLHelper;
-	private LiftDatabase dbHelper;
+	private LiftDatabaseHelper dbHelper;
     private SQLiteDatabase writableDB;
 
     private LiftsAdapter liftAdapter;
@@ -223,7 +223,7 @@ public class Activity_Lifts extends AppCompatActivity {
 
 
     private void instantiateDBHelpers(){
-        dbHelper = new LiftDatabase(getBaseContext());
+        dbHelper = new LiftDatabaseHelper(getBaseContext());
         writableDB = dbHelper.getWritableDatabase();
         SQLHelper = new SQLQueryHelper(getBaseContext());
     }

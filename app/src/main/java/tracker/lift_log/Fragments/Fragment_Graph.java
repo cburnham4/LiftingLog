@@ -1,18 +1,15 @@
 package tracker.lift_log.Fragments;
 
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
@@ -23,11 +20,10 @@ import com.jjoe64.graphview.series.PointsGraphSeries;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 import HelperFiles.DateConverter;
 import tracker.lift_log.AdsHelper;
-import tracker.lift_log.LiftDatabase;
+import tracker.lift_log.LiftDatabaseHelper;
 import tracker.lift_log.R;
 
 /**
@@ -35,7 +31,7 @@ import tracker.lift_log.R;
  */
 public class Fragment_Graph extends Fragment {
     private int lid;
-    private LiftDatabase dbHelper;
+    private LiftDatabaseHelper dbHelper;
 
     SQLiteDatabase readableDatabase;
 
@@ -64,7 +60,7 @@ public class Fragment_Graph extends Fragment {
 
         adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_days),this.getActivity());
         //adsHelper.runAds();
-        dbHelper = new LiftDatabase(getContext());
+        dbHelper = new LiftDatabaseHelper(getContext());
         readableDatabase = dbHelper.getReadableDatabase();
 
         dc = new DateConverter();

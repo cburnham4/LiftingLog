@@ -6,24 +6,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.amazon.device.ads.Ad;
-import com.amazon.device.ads.AdError;
-import com.amazon.device.ads.AdListener;
-import com.amazon.device.ads.AdProperties;
-import com.amazon.device.ads.AdRegistration;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,7 +28,7 @@ import tracker.lift_log.ListViewHelpers.SetsAdapter;
 
 
 public class Activity_InputSet extends Activity{
-    private LiftDatabase dbHelper;
+    private LiftDatabaseHelper dbHelper;
     private SQLQueryHelper sqlQueryHelper;
     private SQLiteDatabase writableDB;
     private ArrayList<Set> sets;
@@ -57,7 +48,7 @@ public class Activity_InputSet extends Activity{
         Intent recievedIntent = getIntent();
         lid = recievedIntent.getIntExtra("LID", 0);
 
-        dbHelper = new LiftDatabase(this);
+        dbHelper = new LiftDatabaseHelper(this);
         writableDB = dbHelper.getWritableDatabase();
         sqlQueryHelper = new SQLQueryHelper(this);
 

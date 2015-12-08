@@ -11,7 +11,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 public class Activity_Tabs extends Activity{
-    LiftDatabase dbHelper;
+    LiftDatabaseHelper dbHelper;
     //Ad variables
     //End Ad variables
     @Override
@@ -19,7 +19,7 @@ public class Activity_Tabs extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
 
-        dbHelper = new LiftDatabase(getBaseContext());
+        dbHelper = new LiftDatabaseHelper(getBaseContext());
         Intent recievedIntent = getIntent();
         final int lid = recievedIntent.getIntExtra("LID", 0);
         String liftName = getLiftName(lid);

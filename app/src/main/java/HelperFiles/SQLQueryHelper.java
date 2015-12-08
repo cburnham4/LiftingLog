@@ -4,17 +4,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import tracker.lift_log.LiftDatabase;
+import tracker.lift_log.LiftDatabaseHelper;
 
 /**
  * Created by cvburnha on 3/6/2015.
  */
 public class SQLQueryHelper {
-    LiftDatabase dbHelper;
+    LiftDatabaseHelper dbHelper;
     SQLiteDatabase dbRead;
 
     public SQLQueryHelper(Context context){
-        dbHelper = new LiftDatabase(context);
+        dbHelper = new LiftDatabaseHelper(context);
         dbRead = dbHelper.getReadableDatabase();
     }
 

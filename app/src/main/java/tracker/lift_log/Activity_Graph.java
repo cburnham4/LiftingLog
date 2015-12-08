@@ -6,14 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ViewGroup;
+import android.view.View;
 import android.widget.TextView;
 
-import com.amazon.device.ads.Ad;
-import com.amazon.device.ads.AdError;
-import com.amazon.device.ads.AdListener;
-import com.amazon.device.ads.AdProperties;
-import com.amazon.device.ads.AdRegistration;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
@@ -34,6 +29,15 @@ public class Activity_Graph extends Activity{
     String maxDate;
     ArrayList<Date> dates;
 
+    DataPoint[] month1DataPoints;
+    DataPoint[] month3DataPoints;
+    DataPoint[] month6DataPoints;
+    DataPoint[] monthYDataPoints;
+    DataPoint[] allDataPoints;
+
+    LiftDatabaseHelper liftDatabaseHelper;
+    private int lid;
+
     private AdsHelper adsHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,17 +45,19 @@ public class Activity_Graph extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_progress);
 
-        LiftDatabase dbHelper = new LiftDatabase(getBaseContext());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        liftDatabaseHelper = new LiftDatabaseHelper(getBaseContext());
+        SQLiteDatabase db = liftDatabaseHelper.getReadableDatabase();
+
         Intent recievedIntent = getIntent();
-        final int lid = recievedIntent.getIntExtra("LID", 0);
+        lid = recievedIntent.getIntExtra("LID", 0);
 
         DateConverter dc = new DateConverter();
+
         //------------------------------------//
         //CALL PRIVATE METHODS TO CREATE GRAPH
         ArrayList<Integer> maxes = null;
         try {
-            maxes = runSQLQuery(lid, db);
+            maxes = getDataPoints(lid, db);
         } catch (ParseException e) {
             Log.i("PARSE ERROR", "FUCKED UP");
         }
@@ -60,7 +66,8 @@ public class Activity_Graph extends Activity{
         if (maxes.size()>0){
             this.createGraph(series, maxes.get(0));
         }
-        //this.createGraph(series, maxes.get(0));
+
+        this.setUpTextViews();
 
 
         TextView maxView = (TextView) findViewById(R.id.Max);
@@ -85,32 +92,68 @@ public class Activity_Graph extends Activity{
 
     }
 
-    private ArrayList<Integer> runSQLQuery(int lid, SQLiteDatabase db) throws ParseException {
-        String sql = "SELECT MAX(maxWeight), date_Lifted FROM Max WHERE lid = "+lid +" GROUP BY date_Lifted ORDER BY date_Lifted";
+
+    private void getDataPoints(String sql, DataPoint[] dataPoints) throws ParseException {
+        SQLiteDatabase db = liftDatabaseHelper.getReadableDatabase();
+
+        /* Run the sql command */
         Cursor c = db.rawQuery(sql, null);
-        ArrayList<Integer> maxes = new ArrayList<Integer>();
-        dates = new ArrayList<>();
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+        /* Initiallize the DataPoint Array */
+        dataPoints = new DataPoint[c.getCount()];
         c.moveToFirst();
-        while (c.isAfterLast() == false){
-            maxes.add(c.getInt(0));
-            dates.add(dateFormat.parse(c.getString(1)));
+
+        for(int i = 0; !c.isAfterLast() ; i++){
+            //maxes.add(c.getInt(0));
+            //dates.add(dateFormat.parse(c.getString(1)));
+            Date date = dateFormat.parse(c.getString(1));
+
+            dataPoints[i] = new DataPoint(date, c.getInt(0));
             c.moveToNext();
         }
-        return maxes;
+        db.close();
+        c.close();
     }
 
     /*todo add in for different dates */
 
-    private DataPoint[] createDataPoints(ArrayList<Integer> maxes){
-        DataPoint[] dps = new DataPoint[maxes.size()];//maxes.size()
-        Log.i("MAX SIZE", maxes.size() + "");
-        for(int i = 0; i<maxes.size(); i++){//maxes.size()
-            Log.i("Date", dates.get(i)+"");
-            dps[i] = new DataPoint(dates.get(i), maxes.get(i));
-        }
-        return dps;
+//    private DataPoint[] createDataPoints(ArrayList<Integer> maxes){
+//        DataPoint[] dps = new DataPoint[maxes.size()];//maxes.size()
+//        Log.i("MAX SIZE", maxes.size() + "");
+//        for(int i = 0; i<maxes.size(); i++){//maxes.size()
+//            Log.i("Date", dates.get(i)+"");
+//            dps[i] = new DataPoint(dates.get(i), maxes.get(i));
+//        }
+//        return dps;
+//    }
+
+     /* todo change to extracting from db every time */
+    private void setUpTextViews(){
+        TextView tv_1m = (TextView) findViewById(R.id.tv_1m);
+        TextView tv_3m = (TextView) findViewById(R.id.tv_3m);
+        TextView tv_6m = (TextView) findViewById(R.id.tv_6m);
+        TextView tv_1y = (TextView) findViewById(R.id.tv_1y);
+        TextView tv_all = (TextView) findViewById(R.id.tv_all);
+
+        tv_1m.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(month1DataPoints == null){
+                    String sql = "SELECT MAX(maxWeight), date_Lifted FROM Max WHERE lid = "+lid +" GROUP BY date_Lifted ORDER BY date_Lifted";
+                    try {
+                        getDataPoints(sql, month1DataPoints);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+                LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(month1DataPoints);
+                /* todo remove masxifOne */
+                createGraph(series, 0);
+
+            }
+        });
     }
 
     private void createGraph(LineGraphSeries<DataPoint> series, int maxIfOne){

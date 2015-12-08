@@ -14,6 +14,7 @@
             android:layout_weight="1"
             android:layout_margin="@dimen/margin_between_dateSelectoin"
             android:textSize="@dimen/graph_dateSelection_textsz"
+            android:id="@+id/tv_1m"
             android:text="1m"
             android:background="@color/tv_graph_background"
             android:clickable="true"
@@ -26,6 +27,7 @@
             android:textSize="@dimen/graph_dateSelection_textsz"
             android:gravity="center_horizontal"
             android:clickable="true"
+            android:id="@+id/tv_3m"
             android:text="3m"/>
         <TextView
             android:layout_width="wrap_content"
@@ -35,6 +37,17 @@
             android:textSize="@dimen/graph_dateSelection_textsz"
             android:gravity="center_horizontal"
             android:clickable="true"
+            android:id="@+id/tv_6m"
+            android:text="6m"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/margin_between_dateSelectoin"
+            android:textSize="@dimen/graph_dateSelection_textsz"
+            android:gravity="center_horizontal"
+            android:clickable="true"
+            android:id="@+id/tv_1y"
             android:text="1y"/>
         <TextView
             android:layout_width="wrap_content"
@@ -44,6 +57,7 @@
             android:textSize="@dimen/graph_dateSelection_textsz"
             android:gravity="center_horizontal"
             android:clickable="true"
+            android:id="@+id/tv_all"
             android:text="All"/>
     </LinearLayout>
     <com.jjoe64.graphview.GraphView

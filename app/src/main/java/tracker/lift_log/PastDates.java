@@ -5,12 +5,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.ViewGroup;
-import android.widget.ListView;
 
 
 import java.util.ArrayList;
@@ -18,8 +14,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import HelperFiles.DateConverter;
-import HelperFiles.Item;
-import HelperFiles.PastDateAdapter;
 import tracker.lift_log.ListViewHelpers.PastCardViewAdapter;
 import tracker.lift_log.ListViewHelpers.PastDay;
 import tracker.lift_log.ListViewHelpers.Set;
@@ -30,7 +24,7 @@ public class PastDates extends Activity{
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private LiftDatabase dbHelper;
+    private LiftDatabaseHelper dbHelper;
     private DateConverter dateConverter;
 
     private ArrayList<PastDay> pastDates;
@@ -50,7 +44,7 @@ public class PastDates extends Activity{
         Intent recievedIntent = getIntent();
         lid = recievedIntent.getIntExtra("LID", 0);
         //USE DATABASE
-        dbHelper = new LiftDatabase(getBaseContext());
+        dbHelper = new LiftDatabaseHelper(getBaseContext());
 
         dateConverter = new DateConverter();
 

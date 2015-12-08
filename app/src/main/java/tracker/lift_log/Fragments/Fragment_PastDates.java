@@ -15,13 +15,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import HelperFiles.DateConverter;
-import HelperFiles.Item;
 import tracker.lift_log.AdsHelper;
-import tracker.lift_log.LiftDatabase;
+import tracker.lift_log.LiftDatabaseHelper;
 import tracker.lift_log.ListViewHelpers.PastCardViewAdapter;
 import tracker.lift_log.ListViewHelpers.PastDay;
 import tracker.lift_log.ListViewHelpers.Set;
-import tracker.lift_log.PastDates;
 import tracker.lift_log.R;
 
 /**
@@ -32,7 +30,7 @@ public class Fragment_PastDates extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private LiftDatabase dbHelper;
+    private LiftDatabaseHelper dbHelper;
     private DateConverter dateConverter;
 
     private ArrayList<PastDay> pastDates;
@@ -56,7 +54,7 @@ public class Fragment_PastDates extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_past_dates, container, false);
         adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_days),this.getActivity());
         //adsHelper.runAds();
-        dbHelper = new LiftDatabase(getContext());
+        dbHelper = new LiftDatabaseHelper(getContext());
         dateConverter = new DateConverter();
         this.getDates();
         this.generateData();

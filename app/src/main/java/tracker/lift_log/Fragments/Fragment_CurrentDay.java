@@ -2,7 +2,6 @@ package tracker.lift_log.Fragments;
 
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -18,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,14 +24,14 @@ import java.util.Date;
 
 import HelperFiles.SQLQueryHelper;
 import tracker.lift_log.AdsHelper;
-import tracker.lift_log.LiftDatabase;
+import tracker.lift_log.LiftDatabaseHelper;
 import tracker.lift_log.ListViewHelpers.Set;
 import tracker.lift_log.ListViewHelpers.SetsAdapter;
 import tracker.lift_log.R;
 
 
 public class Fragment_CurrentDay extends Fragment {
-    private LiftDatabase dbHelper;
+    private LiftDatabaseHelper dbHelper;
     private SQLQueryHelper sqlQueryHelper;
     private SQLiteDatabase writableDB;
     private ArrayList<Set> sets;
@@ -62,7 +60,7 @@ public class Fragment_CurrentDay extends Fragment {
         adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_days),this.getActivity());
         //adsHelper.runAds();
 
-        dbHelper = new LiftDatabase(getContext());
+        dbHelper = new LiftDatabaseHelper(getContext());
         writableDB = dbHelper.getWritableDatabase();
         sqlQueryHelper = new SQLQueryHelper(getContext());
 
