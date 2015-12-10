@@ -40,6 +40,8 @@ public class Activity_InputSet extends Activity{
 
     private AdsHelper adsHelper;
     private int lid;
+
+    /*todo redesign */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
