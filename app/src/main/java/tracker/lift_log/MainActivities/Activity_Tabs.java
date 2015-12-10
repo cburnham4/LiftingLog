@@ -1,4 +1,4 @@
-package tracker.lift_log;
+package tracker.lift_log.MainActivities;
 
 import android.app.Activity;
 import android.app.LocalActivityManager;
@@ -9,6 +9,12 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
+
+import tracker.lift_log.TabbedActivities.Activity_Graph;
+import tracker.lift_log.TabbedActivities.Activity_InputSet;
+import tracker.lift_log.Database.LiftDatabaseHelper;
+import tracker.lift_log.TabbedActivities.Activity_PastDates;
+import tracker.lift_log.R;
 
 public class Activity_Tabs extends Activity{
     LiftDatabaseHelper dbHelper;
@@ -42,7 +48,7 @@ public class Activity_Tabs extends Activity{
         tabHost.addTab(spec1);
 
         TabSpec spec2 =tabHost.newTabSpec("tab2");
-        Intent intent2 = new Intent(this, PastDates.class);
+        Intent intent2 = new Intent(this, Activity_PastDates.class);
         intent2.putExtra("LID", lid);
         intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         spec2.setContent(intent2);//

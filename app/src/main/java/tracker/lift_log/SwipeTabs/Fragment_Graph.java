@@ -1,4 +1,4 @@
-package tracker.lift_log.Fragments;
+package tracker.lift_log.SwipeTabs;
 
 
 import android.database.Cursor;
@@ -21,9 +21,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import HelperFiles.DateConverter;
-import tracker.lift_log.AdsHelper;
-import tracker.lift_log.LiftDatabaseHelper;
+import tracker.lift_log.Helpers.DateConverter;
+import tracker.lift_log.Helpers.AdsHelper;
+import tracker.lift_log.Database.LiftDatabaseHelper;
 import tracker.lift_log.R;
 
 /**

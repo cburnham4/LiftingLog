@@ -1,4 +1,4 @@
-package tracker.lift_log;
+package tracker.lift_log.Database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

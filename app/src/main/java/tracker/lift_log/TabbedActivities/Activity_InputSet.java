@@ -1,4 +1,4 @@
-package tracker.lift_log;
+package tracker.lift_log.TabbedActivities;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -22,9 +22,12 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import HelperFiles.SQLQueryHelper;
+import tracker.lift_log.Helpers.AdsHelper;
+import tracker.lift_log.Database.LiftDatabaseHelper;
+import tracker.lift_log.Database.SQLQueryHelper;
 import tracker.lift_log.ListViewHelpers.Set;
 import tracker.lift_log.ListViewHelpers.SetsAdapter;
+import tracker.lift_log.R;
 
 
 public class Activity_InputSet extends Activity{

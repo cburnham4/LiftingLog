@@ -1,4 +1,4 @@
-package tracker.lift_log;
+package tracker.lift_log.SwipeTabs;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -13,9 +13,7 @@ import android.support.v7.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
-import tracker.lift_log.Fragments.Fragment_CurrentDay;
-import tracker.lift_log.Fragments.Fragment_Graph;
-import tracker.lift_log.Fragments.Fragment_PastDates;
+import tracker.lift_log.R;
 
 public class Activity_TabHolder extends AppCompatActivity {
 

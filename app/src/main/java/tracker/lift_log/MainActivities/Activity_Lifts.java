@@ -1,4 +1,4 @@
-package tracker.lift_log;
+package tracker.lift_log.MainActivities;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -22,12 +22,14 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import HelperFiles.SQLQueryHelper;
-
+import tracker.lift_log.Helpers.AdsHelper;
 import tracker.lift_log.CustomDialogs.AddLiftDialog;
 import tracker.lift_log.CustomDialogs.EditDayLiftDialog;
+import tracker.lift_log.Database.LiftDatabaseHelper;
+import tracker.lift_log.Database.SQLQueryHelper;
 import tracker.lift_log.ListViewHelpers.Lift;
 import tracker.lift_log.ListViewHelpers.LiftsAdapter;
+import tracker.lift_log.R;
 
 public class Activity_Lifts extends AppCompatActivity {
     //INSTANCE VARIABLES

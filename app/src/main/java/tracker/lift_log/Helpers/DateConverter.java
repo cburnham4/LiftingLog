@@ -1,4 +1,4 @@
-package HelperFiles;
+package tracker.lift_log.Helpers;
 
 import java.util.HashMap;
 

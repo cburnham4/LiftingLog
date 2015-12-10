@@ -1,4 +1,4 @@
-package tracker.lift_log;
+package tracker.lift_log.MainActivities;
 
 
 
@@ -23,11 +23,14 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import HelperFiles.SQLQueryHelper;
+import tracker.lift_log.Helpers.AdsHelper;
 import tracker.lift_log.CustomDialogs.AddDayDialog;
 import tracker.lift_log.CustomDialogs.EditDayLiftDialog;
+import tracker.lift_log.Database.LiftDatabaseHelper;
+import tracker.lift_log.Database.SQLQueryHelper;
 import tracker.lift_log.ListViewHelpers.Day;
 import tracker.lift_log.ListViewHelpers.DaysAdapter;
+import tracker.lift_log.R;
 
 public class Activity_Days extends AppCompatActivity {
     private ArrayList<Day> arrayOfDays;

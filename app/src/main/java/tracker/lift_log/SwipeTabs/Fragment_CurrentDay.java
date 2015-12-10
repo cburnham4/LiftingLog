@@ -1,4 +1,4 @@
-package tracker.lift_log.Fragments;
+package tracker.lift_log.SwipeTabs;
 
 
 import android.content.ContentValues;
@@ -22,9 +22,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import HelperFiles.SQLQueryHelper;
-import tracker.lift_log.AdsHelper;
-import tracker.lift_log.LiftDatabaseHelper;
+import tracker.lift_log.Database.SQLQueryHelper;
+import tracker.lift_log.Helpers.AdsHelper;
+import tracker.lift_log.Database.LiftDatabaseHelper;
 import tracker.lift_log.ListViewHelpers.Set;
 import tracker.lift_log.ListViewHelpers.SetsAdapter;
 import tracker.lift_log.R;

@@ -1,25 +1,31 @@
-package tracker.lift_log;
+package tracker.lift_log.SwipeTabs;
 
-import android.app.Activity;
-import android.content.Intent;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import HelperFiles.DateConverter;
+import tracker.lift_log.Helpers.DateConverter;
+import tracker.lift_log.Helpers.AdsHelper;
+import tracker.lift_log.Database.LiftDatabaseHelper;
 import tracker.lift_log.ListViewHelpers.PastCardViewAdapter;
 import tracker.lift_log.ListViewHelpers.PastDay;
 import tracker.lift_log.ListViewHelpers.Set;
+import tracker.lift_log.R;
 
-
-public class PastDates extends Activity{
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class Fragment_PastDates extends Fragment {
     private RecyclerView rv_pastdates;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -33,59 +39,38 @@ public class PastDates extends Activity{
     private AdsHelper adsHelper;
     private int lid;
 
-    /*
-        Todo be able to delete it 
-     */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_past_dates);
+        Bundle args = getArguments();
+        lid = args.getInt("lid", 0);
+    }
 
-        Intent recievedIntent = getIntent();
-        lid = recievedIntent.getIntExtra("LID", 0);
-        //USE DATABASE
-        dbHelper = new LiftDatabaseHelper(getBaseContext());
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.fragment_past_dates, container, false);
+        adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_days),this.getActivity());
+        //adsHelper.runAds();
+        dbHelper = new LiftDatabaseHelper(getContext());
         dateConverter = new DateConverter();
-
         this.getDates();
         this.generateData();
 
 
-
-        rv_pastdates = (RecyclerView) findViewById(R.id.my_recycler_view);
+        rv_pastdates = (RecyclerView) view.findViewById(R.id.my_recycler_view);
 
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager = new LinearLayoutManager(this.getContext());
         rv_pastdates.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
         mAdapter = new PastCardViewAdapter(pastDates);
         rv_pastdates.setAdapter(mAdapter);
 
-        adsHelper = new AdsHelper(getWindow().findViewById(android.R.id.content), getResources().getString(R.string.banner_ad_on_pastlifts),this);
-        adsHelper.setUpAds();
-        int delay = 1000; // delay for 1 sec.
-        int period = getResources().getInteger(R.integer.ad_refresh_rate);
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                adsHelper.refreshAd();  // display the data
-            }
-        }, delay, period);
-
-    }
-
-    public void getDates(){
-        dates = new ArrayList<String>();
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String sql  = "SELECT distinct date_Created FROM Sets WHERE lid = +"+lid+ " ORDER BY date_Created desc";
-        Cursor c = db.rawQuery(sql, null);
-        c.moveToFirst();
-        while (c.isAfterLast() == false) {
-            dates.add(c.getString(0));
-            c.moveToNext();
-        }
+        return view;
     }
 
     private void generateData(){
@@ -111,4 +96,36 @@ public class PastDates extends Activity{
         }
 
     }
+
+    public void getDates(){
+        dates = new ArrayList<String>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String sql  = "SELECT distinct date_Created FROM Sets WHERE lid = +"+lid+ " ORDER BY date_Created desc";
+        Cursor c = db.rawQuery(sql, null);
+        c.moveToFirst();
+        while (c.isAfterLast() == false) {
+            dates.add(c.getString(0));
+            c.moveToNext();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        adsHelper.onPause();
+        super.onPause();
+    }
+
+    public void onResume(){
+        adsHelper.onResume();
+
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        adsHelper.onDestroy();
+        super.onDestroy();
+    }
+
+
 }

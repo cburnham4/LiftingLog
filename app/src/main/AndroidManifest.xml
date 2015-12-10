@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/MyMaterialTheme" >
         <activity
-            android:name=".Activity_Days"
+            android:name=".MainActivities.Activity_Days"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,15 +25,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity_Lifts"
+            android:name=".MainActivities.Activity_Lifts"
             android:label="@string/title_activity_lifts" >
         </activity>
         <activity
-            android:name=".Activity_InputSet"
+            android:name=".TabbedActivities.Activity_InputSet"
             android:label="@string/title_activity_sets" >
         </activity>
         <activity
-            android:name=".Activity_Graph"
+            android:name=".TabbedActivities.Activity_Graph"
             android:label="@string/title_activity_graph_progress" >
         </activity>
 
@@ -53,12 +53,12 @@
             android:name="com.amazon.device.ads.AdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
-            android:name=".PastDates"
+            android:name=".TabbedActivities.Activity_PastDates"
             android:label="@string/title_activity_past_dates" >
         </activity>
-        <activity android:name=".Activity_TabHolder" >
+        <activity android:name=".SwipeTabs.Activity_TabHolder" >
         </activity>
-        <activity android:name=".Activity_Tabs" >
+        <activity android:name=".MainActivities.Activity_Tabs" >
         </activity>
     </application>
 

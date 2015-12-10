@@ -1,4 +1,4 @@
-package tracker.lift_log;
+package tracker.lift_log.TabbedActivities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,14 +8,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -25,7 +22,10 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import HelperFiles.DateConverter;
+import tracker.lift_log.Helpers.AdsHelper;
+import tracker.lift_log.Database.LiftDatabaseHelper;
+import tracker.lift_log.Helpers.DateConverter;
+import tracker.lift_log.R;
 
 public class Activity_Graph extends Activity{
     String maxDate;
