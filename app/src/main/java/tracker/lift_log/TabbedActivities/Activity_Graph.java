@@ -42,6 +42,8 @@ public class Activity_Graph extends Activity{
     private int lid;
 
     private AdsHelper adsHelper;
+
+    /* todo add message for not enough data */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //SET UP CLASS
@@ -55,7 +57,7 @@ public class Activity_Graph extends Activity{
         lid = recievedIntent.getIntExtra("LID", 0);
 
         DateConverter dc = new DateConverter();
-
+        graph = (GraphView) findViewById(R.id.graph);
         //------------------------------------//
         //CALL PRIVATE METHODS TO CREATE GRAPH
         ArrayList<Integer> maxes = null;
@@ -230,7 +232,7 @@ public class Activity_Graph extends Activity{
     /* todo just change the x min and x max for times */
     private void createGraph(LineGraphSeries<DataPoint> series, int maxIfOne){
 
-        graph = (GraphView) findViewById(R.id.graph);
+
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
         if(!series.isEmpty()){
             graph.getGridLabelRenderer().setNumHorizontalLabels(3);

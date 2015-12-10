@@ -52,7 +52,7 @@ public class Activity_Tabs extends Activity{
         intent2.putExtra("LID", lid);
         intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         spec2.setContent(intent2);//
-        spec2.setIndicator("Past Days");
+        spec2.setIndicator("History");
         tabHost.addTab(spec2);
 
         TabSpec spec3 =tabHost.newTabSpec("tab3");
@@ -64,7 +64,7 @@ public class Activity_Tabs extends Activity{
         tabHost.addTab(spec3);
 
         for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
-            tabHost.getTabWidget().getChildAt(i).getLayoutParams().height /= 1.4;
+            tabHost.getTabWidget().getChildAt(i).getLayoutParams().height /= 1.3;
 
         }
     }
