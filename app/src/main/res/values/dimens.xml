@@ -11,4 +11,8 @@
 
     <dimen name="margin_between_dateSelectoin">8dp</dimen>
     <dimen name="graph_dateSelection_textsz">18sp</dimen>
+
+    <dimen name="margin_lr_addsublayouts">50dp</dimen>
+
+    <dimen name="txtsz_addset_labels">16sp</dimen>
 </resources>

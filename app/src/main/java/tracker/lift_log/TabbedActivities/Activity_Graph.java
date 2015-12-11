@@ -44,6 +44,8 @@ public class Activity_Graph extends Activity{
     private AdsHelper adsHelper;
 
     /* todo add message for not enough data */
+
+    /* todo Change to new graph library */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //SET UP CLASS

@@ -36,8 +36,6 @@ public class Activity_InputSet extends Activity{
     private SQLiteDatabase writableDB;
     private ArrayList<Set> sets;
 
-    private TextView tv_max;
-
     private ListView lv_sets;
     private SetsAdapter setsAdapter;
 
@@ -65,9 +63,6 @@ public class Activity_InputSet extends Activity{
 
         setsAdapter = new SetsAdapter(this, sets);
         lv_sets.setAdapter(setsAdapter);
-
-        tv_max = (TextView) findViewById(R.id.max);
-        tv_max.setText("Calculated Max: " + getCalculatedMax(lid));
 
         Button addSet =(Button) findViewById(R.id.AddSet);
         Button addRep = (Button) findViewById(R.id.addRep);
@@ -128,8 +123,7 @@ public class Activity_InputSet extends Activity{
                         Check if max would be greater first
                      */
 
-                    setCalculatedMAX(sid, lid, weight, reps);
-                    tv_max.setText("Calculated Max: " + getCalculatedMax(lid));
+                    setCalculatedMAX(sid, lid, weight, reps);;
                     setsAdapter.notifyDataSetChanged();
                 }
             }
@@ -239,7 +233,6 @@ public class Activity_InputSet extends Activity{
 
         sets.remove(set);
 
-        tv_max.setText("Calculated Max: "+getCalculatedMax(lid));
         setsAdapter.notifyDataSetChanged();
     }
 
