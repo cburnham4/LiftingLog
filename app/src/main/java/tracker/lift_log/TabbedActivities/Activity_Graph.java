@@ -88,16 +88,16 @@ public class Activity_Graph extends Activity{
 
         this.createGraph(oneMonthSeries, 0);
 
-        adsHelper = new AdsHelper(getWindow().findViewById(android.R.id.content), getResources().getString(R.string.banner_ad_on_pastlifts),this);
-        adsHelper.setUpAds();
-        int delay = 1000; // delay for 1 sec.
-        int period = getResources().getInteger(R.integer.ad_refresh_rate);
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                adsHelper.refreshAd();  // display the data
-            }
-        }, delay, period);
+//        adsHelper = new AdsHelper(getWindow().findViewById(android.R.id.content), getResources().getString(R.string.banner_ad_on_pastlifts),this);
+//        adsHelper.setUpAds();
+//        int delay = 1000; // delay for 1 sec.
+//        int period = getResources().getInteger(R.integer.ad_refresh_rate);
+//        Timer timer = new Timer();
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//            public void run() {
+//                adsHelper.refreshAd();  // display the data
+//            }
+//        }, delay, period);
 
 
     }
