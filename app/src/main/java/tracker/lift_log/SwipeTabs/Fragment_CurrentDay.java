@@ -84,9 +84,7 @@ public class Fragment_CurrentDay extends Fragment {
         final EditText repCount = (EditText) view.findViewById(R.id.Reps);
         final EditText weightCount = (EditText) view.findViewById(R.id.Weight);
 
-        /* Todo
-            limit the numbers to positive and acutally there
-         */
+
         addRep.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int rep = Integer.parseInt(repCount.getText().toString());
@@ -130,10 +128,7 @@ public class Fragment_CurrentDay extends Fragment {
                     //-----------------------
                     int sid = sqlQueryHelper.getLastSid();
                     sets.add(new Set(sid, lid, weight, reps, formattedDate));
-                    /*
-                    TODO:
-                        Check if max would be greater first 
-                     */
+
 
                     setCalculatedMAX(sid, lid, weight, reps);
                     tv_max.setText("Calculated Max: " + getCalculatedMax(lid));
@@ -165,9 +160,7 @@ public class Fragment_CurrentDay extends Fragment {
         }
     }
     private void setCalculatedMAX(int sid, int lid, int weight, int reps){
-        /* TODO
-        add max for 6 + reps
-         */
+
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         double calculatedMax = getCalculatedMax(lid);
         double m = 0.0;

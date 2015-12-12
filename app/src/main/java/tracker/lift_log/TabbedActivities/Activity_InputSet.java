@@ -42,7 +42,6 @@ public class Activity_InputSet extends Activity{
     private AdsHelper adsHelper;
     private int lid;
 
-    /*todo redesign */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,9 +72,7 @@ public class Activity_InputSet extends Activity{
         final EditText repCount = (EditText) findViewById(R.id.Reps);
         final EditText weightCount = (EditText) findViewById(R.id.Weight);
 
-        /* Todo
-            limit the numbers to positive and acutally there
-         */
+
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,10 +130,6 @@ public class Activity_InputSet extends Activity{
                     //-----------------------
                     int sid = sqlQueryHelper.getLastSid();
                     sets.add(new Set(sid, lid, weight, reps, formattedDate));
-                    /*
-                    TODO:
-                        Check if max would be greater first
-                     */
 
                     setCalculatedMAX(sid, lid, weight, reps);;
                     setsAdapter.notifyDataSetChanged();
@@ -178,8 +171,8 @@ public class Activity_InputSet extends Activity{
         }
     }
     private void setCalculatedMAX(int sid, int lid, int weight, int reps){
-        /* TODO
-        add max for 6 + reps
+        /*
+            max calculations taken from http://www.weightrainer.net/training/coefficients.html
          */
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         double calculatedMax = getCalculatedMax(lid);
@@ -200,8 +193,20 @@ public class Activity_InputSet extends Activity{
             case 5:
                 m = weight*1.137;
                 break;
+            case 6:
+                m = weight *1.173;
+                break;
+            case 7:
+                m = weight * 1.211;
+                break;
+            case 8:
+                m = weight * 1.251;
+                break;
+            case 9:
+                m = weight * 1.294;
+                break;
             default:
-                m = weight*1.173;
+                m = weight*1.341;
         }
         //if(m > calculatedMax){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

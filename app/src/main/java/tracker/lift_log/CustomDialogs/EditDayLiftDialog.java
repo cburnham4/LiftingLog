@@ -17,7 +17,6 @@ import tracker.lift_log.R;
 public class EditDayLiftDialog extends DialogFragment {
 
 
- /* TODO  Create four dialogs */
     String name;
 
     public interface EditDayLiftListener {

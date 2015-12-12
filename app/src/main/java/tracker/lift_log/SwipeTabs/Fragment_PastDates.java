@@ -78,9 +78,7 @@ public class Fragment_PastDates extends Fragment {
         pastDates = new ArrayList<>();
         for(int i=0; i <dates.size();i++){
             ArrayList<Set> sets = new ArrayList<>();
-            /* TODO
-             redo query
-             */
+
             String sql  = "SELECT weight, reps FROM Sets WHERE lid = +"+lid+ " and date_Created = '"+dates.get(i)+"'";
             Cursor c = db.rawQuery(sql, null);
             c.moveToFirst();

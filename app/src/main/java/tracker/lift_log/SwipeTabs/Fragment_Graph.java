@@ -102,9 +102,6 @@ public class Fragment_Graph extends Fragment {
         }
     }
 
-    /* TODO
-        create graph for month year all time
-     */
     private void createGraph(LineGraphSeries<DataPoint> series, int maxIfOne){
 
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this.getContext()));
