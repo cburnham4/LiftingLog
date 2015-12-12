@@ -68,6 +68,7 @@ public class Activity_InputSet extends Activity{
         Button addRep = (Button) findViewById(R.id.addRep);
         Button subRep = (Button) findViewById(R.id.subRep);
         Button subWeight = (Button) findViewById(R.id.subWeight);
+        Button btn_cancel = (Button) findViewById(R.id.btn_clear_values);
         final Button addWeight = (Button) findViewById(R.id.addWeight);
         final EditText repCount = (EditText) findViewById(R.id.Reps);
         final EditText weightCount = (EditText) findViewById(R.id.Weight);
@@ -75,6 +76,15 @@ public class Activity_InputSet extends Activity{
         /* Todo
             limit the numbers to positive and acutally there
          */
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                repCount.setText("0");
+                weightCount.setText("0");
+            }
+        });
+
         addRep.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int rep = Integer.parseInt(repCount.getText().toString());
@@ -84,7 +94,9 @@ public class Activity_InputSet extends Activity{
         subRep.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int rep = Integer.parseInt(repCount.getText().toString());
-                repCount.setText(rep - 1 + "");
+                if(rep !=0){
+                    repCount.setText(rep - 1 + "");
+                }
             }
         });
         addWeight.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +108,10 @@ public class Activity_InputSet extends Activity{
         subWeight.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int weight = Integer.parseInt(weightCount.getText().toString());
-                weightCount.setText(weight - 5 + "");
+                if(weight > 4){
+                    weightCount.setText(weight - 5 + "");
+                }
+
             }
         });
 
@@ -130,16 +145,16 @@ public class Activity_InputSet extends Activity{
         });
         registerForContextMenu(lv_sets);
 
-        adsHelper = new AdsHelper(getWindow().findViewById(android.R.id.content), getResources().getString(R.string.banner_ad_on_inputset),this);
-        adsHelper.setUpAds();
-        int delay = 1000; // delay for 1 sec.
-        int period = getResources().getInteger(R.integer.ad_refresh_rate);
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                adsHelper.refreshAd();  // display the data
-            }
-        }, delay, period);
+//        adsHelper = new AdsHelper(getWindow().findViewById(android.R.id.content), getResources().getString(R.string.banner_ad_on_inputset),this);
+//        adsHelper.setUpAds();
+//        int delay = 1000; // delay for 1 sec.
+//        int period = getResources().getInteger(R.integer.ad_refresh_rate);
+//        Timer timer = new Timer();
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//            public void run() {
+//                adsHelper.refreshAd();  // display the data
+//            }
+//        }, delay, period);
 
     }
 
@@ -253,11 +268,6 @@ public class Activity_InputSet extends Activity{
     public void onDestroy() {
         adsHelper.onDestroy();
         super.onDestroy();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        //No call for super(). Bug on API Level > 11.
     }
 	
 	
