@@ -60,11 +60,14 @@
             android:id="@+id/tv_all"
             android:text="All"/>
     </LinearLayout>
+
+
     <com.jjoe64.graphview.GraphView
         android:layout_width="match_parent"
         android:layout_height="250dip"
         android:layout_below="@+id/lin_dateSelection"
         android:id="@+id/graph"/>
+
 
     <TextView
         android:layout_width="wrap_content"
