@@ -6,10 +6,10 @@ android {
 
     defaultConfig {
         applicationId "tracker.lift_log"
-        minSdkVersion 11
+        minSdkVersion 9
         targetSdkVersion 23
-        versionCode 27
-        versionName "2.55"
+        versionCode 29
+        versionName "2.61"
     }
     buildTypes {
         release {
