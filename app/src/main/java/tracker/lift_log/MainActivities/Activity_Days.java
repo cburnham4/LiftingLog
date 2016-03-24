@@ -8,11 +8,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -84,6 +84,15 @@ public class Activity_Days extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Click action
+                showAddItem();
+            }
+        });
+
         adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_days),this);
         adsHelper.setUpAds();
         int delay = 1000; // delay for 1 sec.
@@ -109,7 +118,7 @@ public class Activity_Days extends AppCompatActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch(item.getItemId()){
             case R.id.edit:
-                displayDialog(daysAdapter.getItem(info.position));
+                displayEditDialog(daysAdapter.getItem(info.position));
                 Toast.makeText(this, "Edit : " + daysAdapter.getItem(info.position).getDay(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.delete:
@@ -124,47 +133,31 @@ public class Activity_Days extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //toolbar.setLogo(R.drawable.icon114);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_tb_day_lift, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        switch (id){
-            case R.id.action_add:
-                AddDayDialog addDayLiftDialog = new AddDayDialog();
-                addDayLiftDialog.setCallback(new AddDayDialog.AddDayListener() {
-                    @Override
-                    public void onDialogPositiveClick(String newName) {
-                        if (!newName.isEmpty()){
+    public void showAddItem(){
+        AddDayDialog addDayLiftDialog = new AddDayDialog();
+        addDayLiftDialog.setCallback(new AddDayDialog.AddDayListener() {
+            @Override
+            public void onDialogPositiveClick(String newName) {
+                if (!newName.isEmpty()){
                 /* Insert the new day into the database */
-                            ContentValues values = new ContentValues();
-                            values.put("day", newName);
-                            writableDB.insert("Days", null, values);
+                    ContentValues values = new ContentValues();
+                    values.put("day", newName);
+                    writableDB.insert("Days", null, values);
 
                 /* Add the new day to the listview */
-                            arrayOfDays.add(new Day(SQLHelper.getLastDid(), newName));
-                            daysAdapter.notifyDataSetChanged();
-                        }else{
-                            Toast.makeText(getApplicationContext(), "No text was provided", Toast.LENGTH_SHORT).show();
-                        }
+                    arrayOfDays.add(new Day(SQLHelper.getLastDid(), newName));
+                    daysAdapter.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(getApplicationContext(), "No text was provided", Toast.LENGTH_SHORT).show();
+                }
 
-                    }
-                });
-                addDayLiftDialog.show(this.getSupportFragmentManager(), "Add_Muscle");
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
+            }
+        });
+        addDayLiftDialog.show(this.getSupportFragmentManager(), "Add_Muscle");
     }
-    private void displayDialog(Day day){
+
+    private void displayEditDialog(Day day){
         EditDayLiftDialog editDayLiftDialog = new EditDayLiftDialog();
         final Day d = day;
 
