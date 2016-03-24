@@ -4,7 +4,7 @@
     xmlns:Amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
     android:orientation="horizontal"
     android:layout_width="fill_parent"
-    android:layout_height="50dp"
+    android:layout_height="@dimen/ad_layout_height"
     android:layout_centerHorizontal="true"
     android:layout_alignParentBottom="true"
     android:gravity="center_horizontal"
