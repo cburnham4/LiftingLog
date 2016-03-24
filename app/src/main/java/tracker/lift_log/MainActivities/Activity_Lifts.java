@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -91,16 +92,25 @@ public class Activity_Lifts extends AppCompatActivity {
 
         registerForContextMenu(lv_lifts);
 
-        adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_lifts),this);
-        adsHelper.setUpAds();
-        int delay = 1000; // delay for 1 sec.
-        int period = getResources().getInteger(R.integer.ad_refresh_rate);
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                adsHelper.refreshAd();  // display the data
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Click action
+                showAddItem();
             }
-        }, delay, period);
+        });
+
+        //adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_lifts),this);
+//        adsHelper.setUpAds();
+//        int delay = 1000; // delay for 1 sec.
+//        int period = getResources().getInteger(R.integer.ad_refresh_rate);
+//        Timer timer = new Timer();
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//            public void run() {
+//                adsHelper.refreshAd();  // display the data
+//            }
+//        }, delay, period);
         
 	}
     private void setUpToolbar(){
@@ -160,44 +170,26 @@ public class Activity_Lifts extends AppCompatActivity {
         liftAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_tb_day_lift, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        switch (id){
-            case R.id.action_add:
-                AddLiftDialog addDayLiftDialog = new AddLiftDialog();
-                addDayLiftDialog.setCallback(new AddLiftDialog.AddLiftListener() {
-                    @Override
-                    public void onDialogPositiveClick(String newName) {
-                        if (!newName.isEmpty()){
+    private void showAddItem(){
+        AddLiftDialog addDayLiftDialog = new AddLiftDialog();
+        addDayLiftDialog.setCallback(new AddLiftDialog.AddLiftListener() {
+            @Override
+            public void onDialogPositiveClick(String newName) {
+                if (!newName.isEmpty()){
                 /* Insert the new day into the database */
-                            ContentValues values = new ContentValues();
-                            values.put("liftname", newName);
-                            values.put("did", did);
-                            writableDB.insert("Lifts", null, values);
-                            arrayOfLifts.add(new Lift(SQLHelper.getLastLid(), did, newName));
-                            liftAdapter.notifyDataSetChanged();
-                        }else{
-                            Toast.makeText(getApplicationContext(), "No text was provided", Toast.LENGTH_SHORT).show();
-                        }
+                    ContentValues values = new ContentValues();
+                    values.put("liftname", newName);
+                    values.put("did", did);
+                    writableDB.insert("Lifts", null, values);
+                    arrayOfLifts.add(new Lift(SQLHelper.getLastLid(), did, newName));
+                    liftAdapter.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(getApplicationContext(), "No text was provided", Toast.LENGTH_SHORT).show();
+                }
 
-                    }
-                });
-                addDayLiftDialog.show(this.getSupportFragmentManager(), "Add_Muscle");
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
+            }
+        });
+        addDayLiftDialog.show(this.getSupportFragmentManager(), "Add_Muscle");
     }
 
     private void deleteFromDatabase(Lift lift){
@@ -230,20 +222,20 @@ public class Activity_Lifts extends AppCompatActivity {
         SQLHelper = new SQLQueryHelper(getBaseContext());
     }
 
-    @Override
-    public void onPause() {
-        adsHelper.onPause();
-        super.onPause();
-    }
-
-    public void onResume(){
-        adsHelper.onResume();
-        super.onResume();
-    }
-
-    @Override
-    public void onDestroy() {
-        adsHelper.onDestroy();
-        super.onDestroy();
-    }
+//    @Override
+//    public void onPause() {
+//        adsHelper.onPause();
+//        super.onPause();
+//    }
+//
+//    public void onResume(){
+//        adsHelper.onResume();
+//        super.onResume();
+//    }
+//
+//    @Override
+//    public void onDestroy() {
+//        adsHelper.onDestroy();
+//        super.onDestroy();
+//    }
 }

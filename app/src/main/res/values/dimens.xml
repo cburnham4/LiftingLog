@@ -20,6 +20,6 @@
 
     <!-- Lift and Days Activity -->
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="fab_bottom_margin">@dimen/ad_layout_height</dimen>
+    <dimen name="fab_bottom_margin">66dp</dimen>
     <dimen name="lv_item_text_size">24sp</dimen>
 </resources>
