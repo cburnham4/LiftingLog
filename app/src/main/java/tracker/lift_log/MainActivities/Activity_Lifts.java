@@ -101,16 +101,16 @@ public class Activity_Lifts extends AppCompatActivity {
             }
         });
 
-        //adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_lifts),this);
-//        adsHelper.setUpAds();
-//        int delay = 1000; // delay for 1 sec.
-//        int period = getResources().getInteger(R.integer.ad_refresh_rate);
-//        Timer timer = new Timer();
-//        timer.scheduleAtFixedRate(new TimerTask() {
-//            public void run() {
-//                adsHelper.refreshAd();  // display the data
-//            }
-//        }, delay, period);
+        adsHelper = new AdsHelper(getWindow().getDecorView(), getResources().getString(R.string.banner_ad_on_lifts),this);
+        adsHelper.setUpAds();
+        int delay = 1000; // delay for 1 sec.
+        int period = getResources().getInteger(R.integer.ad_refresh_rate);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                adsHelper.refreshAd();  // display the data
+            }
+        }, delay, period);
         
 	}
     private void setUpToolbar(){
@@ -222,20 +222,20 @@ public class Activity_Lifts extends AppCompatActivity {
         SQLHelper = new SQLQueryHelper(getBaseContext());
     }
 
-//    @Override
-//    public void onPause() {
-//        adsHelper.onPause();
-//        super.onPause();
-//    }
-//
-//    public void onResume(){
-//        adsHelper.onResume();
-//        super.onResume();
-//    }
-//
-//    @Override
-//    public void onDestroy() {
-//        adsHelper.onDestroy();
-//        super.onDestroy();
-//    }
+    @Override
+    public void onPause() {
+        adsHelper.onPause();
+        super.onPause();
+    }
+
+    public void onResume(){
+        adsHelper.onResume();
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        adsHelper.onDestroy();
+        super.onDestroy();
+    }
 }
