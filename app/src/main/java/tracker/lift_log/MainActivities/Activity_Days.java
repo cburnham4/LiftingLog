@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -101,6 +102,7 @@ public class Activity_Days extends AppCompatActivity {
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 adsHelper.refreshAd();  // display the data
+                Log.e("REFRESH", "Ad refresh called");
             }
         }, delay, period);
 
@@ -218,20 +220,5 @@ public class Activity_Days extends AppCompatActivity {
         lv_days = (ListView)findViewById(R.id.lv_days_lifts);
     }
 
-    @Override
-    public void onPause() {
-        adsHelper.onPause();
-        super.onPause();
-    }
 
-    public void onResume(){
-        adsHelper.onResume();
-        super.onResume();
-    }
-
-    @Override
-    public void onDestroy() {
-        adsHelper.onDestroy();
-        super.onDestroy();
-    }
 }

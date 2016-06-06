@@ -44,7 +44,7 @@ public class AdsHelper implements AdListener {
         admobAdView = new com.google.android.gms.ads.AdView(activity);
         admobAdView.setAdSize(com.google.android.gms.ads.AdSize.BANNER);
         admobAdView.setAdUnitId(admob_id);
-name
+
         // Initialize view container
         adViewContainer = (ViewGroup) view.findViewById(R.id.ad_layout);
         amazonAdEnabled = true;
@@ -98,17 +98,5 @@ name
 
     }
 
-    public void onDestroy()
-    {
-        this.amazonAdView.destroy();
 
-    }
-
-    public void onPause(){
-        this.amazonAdView.destroy();
-    }
-
-    public void onResume(){
-        this.setUpAds();
-    }
 }

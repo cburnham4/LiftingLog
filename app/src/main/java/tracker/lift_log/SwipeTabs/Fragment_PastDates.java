@@ -107,23 +107,5 @@ public class Fragment_PastDates extends Fragment {
         }
     }
 
-    @Override
-    public void onPause() {
-        adsHelper.onPause();
-        super.onPause();
-    }
-
-    public void onResume(){
-        adsHelper.onResume();
-
-        super.onResume();
-    }
-
-    @Override
-    public void onDestroy() {
-        adsHelper.onDestroy();
-        super.onDestroy();
-    }
-
 
 }

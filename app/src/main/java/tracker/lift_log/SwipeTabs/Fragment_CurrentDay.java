@@ -233,23 +233,6 @@ public class Fragment_CurrentDay extends Fragment {
     }
 
 
-    @Override
-    public void onPause() {
-        adsHelper.onPause();
-        super.onPause();
-    }
-
-    public void onResume(){
-        adsHelper.onResume();
-        //Toast.makeText(this.getContext(), "RESUME", Toast.LENGTH_SHORT).show();
-        super.onResume();
-    }
-
-    @Override
-    public void onDestroy() {
-        adsHelper.onDestroy();
-        super.onDestroy();
-    }
 
 
 }
