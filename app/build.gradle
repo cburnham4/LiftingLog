@@ -8,8 +8,8 @@ android {
         applicationId "tracker.lift_log"
         minSdkVersion 9
         targetSdkVersion 23
-        versionCode 33
-        versionName "2.74"
+        versionCode 34
+        versionName "2.8"
     }
     buildTypes {
         release {
