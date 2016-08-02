@@ -204,10 +204,13 @@ public class Activity_Graph extends Activity{
     private void createGraph(){
         graph.setTitle("Max Weight Over Time");
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
+        graph.getGridLabelRenderer().setPadding(16);
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getGridLabelRenderer().setNumHorizontalLabels(3);
         if(!lineGraphSeries.isEmpty()){
-            graph.getGridLabelRenderer().setNumHorizontalLabels(3);
-            graph.getViewport().setXAxisBoundsManual(true);
-            graph.getViewport().setYAxisBoundsManual(true);
+
+
             if(dataPoints.size() == 1){
                 DataPoint dataPoint = dataPoints.get(0);
                 PointsGraphSeries<DataPoint> seriesSingle = new PointsGraphSeries<DataPoint>(new DataPoint[] {
