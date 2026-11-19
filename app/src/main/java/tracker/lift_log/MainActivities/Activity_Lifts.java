@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +24,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import tracker.lift_log.Helpers.AdsHelper;
+import tracker.lift_log.Helpers.EdgeToEdgeHelper;
 import tracker.lift_log.CustomDialogs.AddLiftDialog;
 import tracker.lift_log.CustomDialogs.EditDayLiftDialog;
 import tracker.lift_log.Database.LiftDatabaseHelper;
@@ -53,6 +54,7 @@ public class Activity_Lifts extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lifts_days_layout);
+        EdgeToEdgeHelper.apply(this, findViewById(android.R.id.content));
         //GET DID
 		Intent recievedIntent = getIntent();
 		this.did = recievedIntent.getIntExtra("ITEM_CLICKED", 0);
@@ -135,14 +137,13 @@ public class Activity_Lifts extends AppCompatActivity {
 
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch(item.getItemId()){
-            case R.id.edit:
-                displayDialog(liftAdapter.getItem(info.position));
-                Toast.makeText(this, "Edit: " + liftAdapter.getItem(info.position).getLift(), Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.delete:
-                Toast.makeText(this, "Deleted: " + liftAdapter.getItem(info.position).getLift(), Toast.LENGTH_SHORT).show();
-                deleteFromDatabase(liftAdapter.getItem(info.position));
+        int itemId = item.getItemId();
+        if (itemId == R.id.edit) {
+            displayDialog(liftAdapter.getItem(info.position));
+            Toast.makeText(this, "Edit: " + liftAdapter.getItem(info.position).getLift(), Toast.LENGTH_SHORT).show();
+        } else if (itemId == R.id.delete) {
+            Toast.makeText(this, "Deleted: " + liftAdapter.getItem(info.position).getLift(), Toast.LENGTH_SHORT).show();
+            deleteFromDatabase(liftAdapter.getItem(info.position));
         }
         return true;
     }

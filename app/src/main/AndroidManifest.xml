@@ -1,80 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="tracker.lift_log" >
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Include required permissions for Google Mobile Ads to run -->
+    <!-- Required permissions for Google Mobile Ads -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!-- Legacy storage permission limited to older APIs (not used by modern ads SDK) -->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon_lifting_114"
         android:label="@string/app_name"
+        android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme"
-        >
-        <activity
-            android:name=".MainActivities.Activity_Days"
-            android:label="@string/app_name"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:usesCleartextTraffic="false"
+        tools:targetApi="36">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivities.Activity_Lifts"
-            android:label="@string/title_activity_lifts"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".TabbedActivities.Activity_InputSet"
-            android:label="@string/title_activity_sets"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".TabbedActivities.Activity_Graph"
-            android:label="@string/title_activity_graph_progress"
-            android:windowSoftInputMode="stateHidden"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity
-            android:name=".TabbedActivities.Activity_PastDates"
-            android:label="@string/title_activity_past_dates"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".SwipeTabs.Activity_TabHolder" >
-
-        </activity>
-        <activity android:name=".MainActivities.Activity_Tabs"
-            android:configChanges="orientation"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:screenOrientation="portrait">
-        </activity>
+        <!-- AdMob Application ID (debug overlay uses Google test ID) -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:theme="@android:style/Theme.Translucent" />
+            android:name=".MainActivities.Activity_Days"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
-            android:name="com.amazon.device.ads.AdActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:name=".MainActivities.Activity_Lifts"
+            android:exported="false"
+            android:label="@string/title_activity_lifts"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".TabbedActivities.Activity_InputSet"
+            android:exported="false"
+            android:label="@string/title_activity_sets"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".TabbedActivities.Activity_Graph"
+            android:exported="false"
+            android:label="@string/title_activity_graph_progress"
+            android:windowSoftInputMode="stateHidden"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".TabbedActivities.Activity_PastDates"
+            android:exported="false"
+            android:label="@string/title_activity_past_dates"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".SwipeTabs.Activity_TabHolder"
+            android:exported="false"
+            android:configChanges="orientation"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:screenOrientation="portrait" />
+
+        <!-- Legacy TabHost host kept for compatibility; main flow uses Activity_TabHolder -->
+        <activity
+            android:name=".MainActivities.Activity_Tabs"
+            android:exported="false"
+            android:configChanges="orientation"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    DEBUG BUILD: Google official test ad IDs.
+    Production IDs live in app/src/main/res/values/ad_config.xml.
+-->
+<resources>
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="amazon_ad_id">TEST</string>
+    <string name="banner_ad_on_days">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_on_lifts">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_on_inputset">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_on_pastlifts">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_on_graph">ca-app-pub-3940256099942544/6300978111</string>
+</resources>

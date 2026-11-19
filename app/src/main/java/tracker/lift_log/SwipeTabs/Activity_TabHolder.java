@@ -1,25 +1,24 @@
 package tracker.lift_log.SwipeTabs;
 
 import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import tracker.lift_log.Helpers.EdgeToEdgeHelper;
 import tracker.lift_log.R;
 
 public class Activity_TabHolder extends AppCompatActivity {
-
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
 
     private int lid;
 
@@ -27,66 +26,72 @@ public class Activity_TabHolder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabholder);
+        EdgeToEdgeHelper.apply(this, findViewById(android.R.id.content));
 
-        //toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+            toolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        }
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Intent recievedIntent = getIntent();
-        lid = recievedIntent.getIntExtra("LID", 0);
+        Intent receivedIntent = getIntent();
+        lid = receivedIntent.getIntExtra("LID", 0);
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        Fragment fragment_currentday = new Fragment_CurrentDay();
-        Fragment fragment_pastdates = new Fragment_PastDates();
-        Fragment fragment_graph = new Fragment_Graph();
+        Fragment fragmentCurrentDay = new Fragment_CurrentDay();
+        Fragment fragmentPastDates = new Fragment_PastDates();
+        Fragment fragmentGraph = new Fragment_Graph();
 
         Bundle args = new Bundle();
         args.putInt("lid", lid);
-        fragment_currentday.setArguments(args);
-        fragment_pastdates.setArguments(args);
-        fragment_graph.setArguments(args);
+        fragmentCurrentDay.setArguments(args);
+        fragmentPastDates.setArguments(args);
+        fragmentGraph.setArguments(args);
 
-        adapter.addFragment(fragment_currentday, "Current Day");
-        adapter.addFragment(fragment_pastdates, "Past Days");
-        adapter.addFragment(fragment_graph, "Graph");
+        adapter.addFragment(fragmentCurrentDay, "Current Day");
+        adapter.addFragment(fragmentPastDates, "Past Days");
+        adapter.addFragment(fragmentGraph, "Graph");
         viewPager.setAdapter(adapter);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+    static class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> fragmentList = new ArrayList<>();
+        private final List<String> fragmentTitleList = new ArrayList<>();
 
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
+        ViewPagerAdapter(FragmentManager manager) {
+            super(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
         public Fragment getItem(int position) {
-            return mFragmentList.get(position);
+            return fragmentList.get(position);
         }
 
         @Override
         public int getCount() {
-            return mFragmentList.size();
+            return fragmentList.size();
         }
 
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
+        void addFragment(Fragment fragment, String title) {
+            fragmentList.add(fragment);
+            fragmentTitleList.add(title);
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
+            return fragmentTitleList.get(position);
         }
     }
 }

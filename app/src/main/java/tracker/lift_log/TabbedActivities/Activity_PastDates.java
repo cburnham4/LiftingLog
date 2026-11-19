@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import tracker.lift_log.Helpers.AdsHelper;
+import tracker.lift_log.Helpers.EdgeToEdgeHelper;
 import tracker.lift_log.Database.LiftDatabaseHelper;
 import tracker.lift_log.Helpers.DateConverter;
 import tracker.lift_log.ListViewHelpers.PastCardViewAdapter;
@@ -43,6 +44,7 @@ public class Activity_PastDates extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_past_dates);
+        EdgeToEdgeHelper.apply(this, findViewById(android.R.id.content));
 
         Intent recievedIntent = getIntent();
         lid = recievedIntent.getIntExtra("LID", 0);

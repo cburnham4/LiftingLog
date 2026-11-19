@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    PRODUCTION AdMob Configuration for Lift Log (tracker.lift_log)
+    Publisher ID: pub-8223005482588566
+    App ID: ca-app-pub-8223005482588566~1733400735
+
+    Plain banner units from AdMob console (Appodeal-generated units are unused).
+    Debug builds override these with Google test IDs via
+    app/src/debug/res/values/ad_config.xml.
+
+    Screen / resource mapping:
+    =====================================================================
+    Resource                 | AdMob unit name                 | Screen
+    banner_ad_on_days        | Banner Ad at Bottom of Home     | Activity_Days (home)
+    banner_ad_on_lifts       | Bottom Of Lifts                 | Activity_Lifts
+    banner_ad_on_inputset    | Banner on Input Set             | Input Set / Current Day
+    banner_ad_on_pastlifts   | Banner on Past Lifts            | Past Dates / History
+    banner_ad_on_graph       | Banner On Bottom Of Progress    | Graph / Progress
+-->
+<resources>
+    <string name="admob_app_id">ca-app-pub-8223005482588566~1733400735</string>
+
+    <!-- Deprecated Amazon Ads app key (no longer used; kept so old references resolve) -->
+    <string name="amazon_ad_id">DEPRECATED</string>
+
+    <!-- Plain banner units (AdMob console names) -->
+    <string name="banner_ad_on_days">ca-app-pub-8223005482588566/1593799938</string>
+    <string name="banner_ad_on_lifts">ca-app-pub-8223005482588566/4547266330</string>
+    <string name="banner_ad_on_inputset">ca-app-pub-8223005482588566/4552630337</string>
+    <string name="banner_ad_on_pastlifts">ca-app-pub-8223005482588566/9122430732</string>
+    <string name="banner_ad_on_graph">ca-app-pub-8223005482588566/9780411138</string>
+</resources>
