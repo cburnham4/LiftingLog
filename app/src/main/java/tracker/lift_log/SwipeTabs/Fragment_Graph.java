@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,8 +58,8 @@ public class Fragment_Graph extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_graph, container, false);
 
-        adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_days),this.getActivity());
-        //adsHelper.runAds();
+        adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_graph), this.getActivity());
+        adsHelper.setUpAds();
         dbHelper = new LiftDatabaseHelper(getContext());
         readableDatabase = dbHelper.getReadableDatabase();
 

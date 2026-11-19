@@ -5,7 +5,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -57,8 +57,8 @@ public class Fragment_CurrentDay extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_current_day, container, false);
 
-        adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_days),this.getActivity());
-        //adsHelper.runAds();
+        adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_inputset), this.getActivity());
+        adsHelper.setUpAds();
 
         dbHelper = new LiftDatabaseHelper(getContext());
         writableDB = dbHelper.getWritableDatabase();
@@ -213,10 +213,8 @@ public class Fragment_CurrentDay extends Fragment {
     }
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch(item.getItemId()){
-            case R.id.deleteCurrent:
-                //Toast.makeText(this, "Deleted: " + adapter.getItem(info.position), Toast.LENGTH_SHORT).show();
-                deleteFromDatabase(sets.get(info.position));
+        if (item.getItemId() == R.id.deleteCurrent) {
+            deleteFromDatabase(sets.get(info.position));
         }
         return true;
     }

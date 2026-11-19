@@ -8,10 +8,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -25,6 +25,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import tracker.lift_log.Helpers.AdsHelper;
+import tracker.lift_log.Helpers.EdgeToEdgeHelper;
 import tracker.lift_log.CustomDialogs.AddDayDialog;
 import tracker.lift_log.CustomDialogs.EditDayLiftDialog;
 import tracker.lift_log.Database.LiftDatabaseHelper;
@@ -55,7 +56,7 @@ public class Activity_Days extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lifts_days_layout);
-
+        EdgeToEdgeHelper.apply(this, findViewById(android.R.id.content));
 
         this.setTitle("Muscle Groups");
         this.setUpToolbar();
@@ -118,15 +119,13 @@ public class Activity_Days extends AppCompatActivity {
 
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch(item.getItemId()){
-            case R.id.edit:
-                displayEditDialog(daysAdapter.getItem(info.position));
-                Toast.makeText(this, "Edit : " + daysAdapter.getItem(info.position).getDay(), Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.delete:
-                Toast.makeText(this, "Deleted: " + daysAdapter.getItem(info.position).getDay(), Toast.LENGTH_SHORT).show();
-                deleteFromDatabase(daysAdapter.getItem(info.position));
-                break;
+        int itemId = item.getItemId();
+        if (itemId == R.id.edit) {
+            displayEditDialog(daysAdapter.getItem(info.position));
+            Toast.makeText(this, "Edit : " + daysAdapter.getItem(info.position).getDay(), Toast.LENGTH_SHORT).show();
+        } else if (itemId == R.id.delete) {
+            Toast.makeText(this, "Deleted: " + daysAdapter.getItem(info.position).getDay(), Toast.LENGTH_SHORT).show();
+            deleteFromDatabase(daysAdapter.getItem(info.position));
         }
         return true;
     }

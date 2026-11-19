@@ -65,8 +65,6 @@
                 android:inputType="number"
                 android:text="0"
                 android:id="@+id/Reps"
-                android:numeric="integer"
-
                 android:layout_gravity="center_horizontal"
                 android:clickable="false"
                 android:gravity="center_horizontal" />
@@ -112,7 +110,6 @@
                 android:text="0"
                 android:id="@+id/Weight"
 
-                android:numeric="decimal"
                 android:longClickable="true"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal" />

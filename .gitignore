@@ -4,6 +4,9 @@
 /.idea/libraries
 .DS_Store
 /build
-/app/src/main/res/values/integers.xml
-/app/src/main/res/values/strings.xml
-/app/src/main/java/tracker/lift_log/AdsHelper.java
+/app/build
+/captures
+.kotlin/
+keystore.properties
+*.jks
+local.properties

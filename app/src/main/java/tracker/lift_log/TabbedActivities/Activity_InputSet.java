@@ -23,6 +23,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import tracker.lift_log.Helpers.AdsHelper;
+import tracker.lift_log.Helpers.EdgeToEdgeHelper;
 import tracker.lift_log.Database.LiftDatabaseHelper;
 import tracker.lift_log.Database.SQLQueryHelper;
 import tracker.lift_log.ListViewHelpers.Set;
@@ -46,6 +47,7 @@ public class Activity_InputSet extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sets_layout);
+        EdgeToEdgeHelper.apply(this, findViewById(android.R.id.content));
 
         Intent recievedIntent = getIntent();
         lid = recievedIntent.getIntExtra("LID", 0);
@@ -238,10 +240,8 @@ public class Activity_InputSet extends Activity{
     }
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch(item.getItemId()){
-            case R.id.deleteCurrent:
-                //Toast.makeText(this, "Deleted: " + adapter.getItem(info.position), Toast.LENGTH_SHORT).show();
-                deleteFromDatabase(sets.get(info.position));
+        if (item.getItemId() == R.id.deleteCurrent) {
+            deleteFromDatabase(sets.get(info.position));
         }
         return true;
     }

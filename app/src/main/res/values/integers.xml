@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Ad refresh interval in milliseconds (60s; original APK used 1200ms which violates AdMob refresh policy) -->
+    <integer name="ad_refresh_rate">60000</integer>
+</resources>

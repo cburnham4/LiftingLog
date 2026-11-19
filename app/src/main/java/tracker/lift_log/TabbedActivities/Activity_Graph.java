@@ -25,7 +25,10 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import androidx.core.content.ContextCompat;
+
 import tracker.lift_log.Helpers.AdsHelper;
+import tracker.lift_log.Helpers.EdgeToEdgeHelper;
 import tracker.lift_log.Database.LiftDatabaseHelper;
 import tracker.lift_log.Helpers.DateConverter;
 import tracker.lift_log.R;
@@ -56,6 +59,7 @@ public class Activity_Graph extends Activity{
         //SET UP CLASS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_progress);
+        EdgeToEdgeHelper.apply(this, findViewById(android.R.id.content));
 
         rel_graph = (RelativeLayout) findViewById(R.id.rel_graph);
         tvNoData = (TextView) findViewById(R.id.tv_noData);
@@ -134,7 +138,7 @@ public class Activity_Graph extends Activity{
                 tv.setBackgroundColor(0);
             }
             /* set background for selected item */
-            tvDateSelections[tvIndex].setBackgroundColor(getResources().getColor(R.color.tv_graph_background));
+            tvDateSelections[tvIndex].setBackgroundColor(ContextCompat.getColor(Activity_Graph.this, R.color.tv_graph_background));
         }
     }
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    PRODUCTION AdMob Configuration for Lift Log (tracker.lift_log)
+    Publisher ID: pub-8223005482588566
+
+    Banner unit IDs below were recovered from the previously shipped app-release.apk
+    (versionCode 34 / 2.8). Debug builds override these with Google test IDs via
+    app/src/debug/res/values/ad_config.xml.
+
+    TODO (required before Play release):
+    - Set admob_app_id to the Lift Log AdMob Application ID from the AdMob console
+      (format ca-app-pub-8223005482588566~XXXXXXXXXX). The old APK did not embed an
+      APPLICATION_ID meta-data value (pre-App-ID SDK), so it could not be recovered.
+    - Confirm each banner unit still exists / is linked to this app in AdMob.
+-->
+<resources>
+    <!-- TODO: Replace with Lift Log AdMob App ID from AdMob console -->
+    <string name="admob_app_id">ca-app-pub-8223005482588566~TODO_APP_ID</string>
+
+    <!-- Deprecated Amazon Ads app key (no longer used; kept so old references resolve) -->
+    <string name="amazon_ad_id">DEPRECATED</string>
+
+    <!-- Banner units recovered from shipped APK -->
+    <string name="banner_ad_on_days">ca-app-pub-8223005482588566/1593799938</string>
+    <string name="banner_ad_on_lifts">ca-app-pub-8223005482588566/4547266330</string>
+    <string name="banner_ad_on_inputset">ca-app-pub-8223005482588566/4552630337</string>
+    <string name="banner_ad_on_pastlifts">ca-app-pub-8223005482588566/9122430732</string>
+    <string name="banner_ad_on_graph">ca-app-pub-8223005482588566/9780411138</string>
+</resources>

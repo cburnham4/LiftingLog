@@ -5,9 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,8 +52,8 @@ public class Fragment_PastDates extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_past_dates, container, false);
-        adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_days),this.getActivity());
-        //adsHelper.runAds();
+        adsHelper = new AdsHelper(view, getResources().getString(R.string.banner_ad_on_pastlifts), this.getActivity());
+        adsHelper.setUpAds();
         dbHelper = new LiftDatabaseHelper(getContext());
         dateConverter = new DateConverter();
         this.getDates();
