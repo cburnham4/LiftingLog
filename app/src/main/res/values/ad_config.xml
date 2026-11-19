@@ -2,25 +2,28 @@
 <!--
     PRODUCTION AdMob Configuration for Lift Log (tracker.lift_log)
     Publisher ID: pub-8223005482588566
+    App ID: ca-app-pub-8223005482588566~1733400735
 
-    Banner unit IDs below were recovered from the previously shipped app-release.apk
-    (versionCode 34 / 2.8). Debug builds override these with Google test IDs via
+    Plain banner units from AdMob console (Appodeal-generated units are unused).
+    Debug builds override these with Google test IDs via
     app/src/debug/res/values/ad_config.xml.
 
-    TODO (required before Play release):
-    - Set admob_app_id to the Lift Log AdMob Application ID from the AdMob console
-      (format ca-app-pub-8223005482588566~XXXXXXXXXX). The old APK did not embed an
-      APPLICATION_ID meta-data value (pre-App-ID SDK), so it could not be recovered.
-    - Confirm each banner unit still exists / is linked to this app in AdMob.
+    Screen / resource mapping:
+    =====================================================================
+    Resource                 | AdMob unit name                 | Screen
+    banner_ad_on_days        | Banner Ad at Bottom of Home     | Activity_Days (home)
+    banner_ad_on_lifts       | Bottom Of Lifts                 | Activity_Lifts
+    banner_ad_on_inputset    | Banner on Input Set             | Input Set / Current Day
+    banner_ad_on_pastlifts   | Banner on Past Lifts            | Past Dates / History
+    banner_ad_on_graph       | Banner On Bottom Of Progress    | Graph / Progress
 -->
 <resources>
-    <!-- TODO: Replace with Lift Log AdMob App ID from AdMob console -->
-    <string name="admob_app_id">ca-app-pub-8223005482588566~TODO_APP_ID</string>
+    <string name="admob_app_id">ca-app-pub-8223005482588566~1733400735</string>
 
     <!-- Deprecated Amazon Ads app key (no longer used; kept so old references resolve) -->
     <string name="amazon_ad_id">DEPRECATED</string>
 
-    <!-- Banner units recovered from shipped APK -->
+    <!-- Plain banner units (AdMob console names) -->
     <string name="banner_ad_on_days">ca-app-pub-8223005482588566/1593799938</string>
     <string name="banner_ad_on_lifts">ca-app-pub-8223005482588566/4547266330</string>
     <string name="banner_ad_on_inputset">ca-app-pub-8223005482588566/4552630337</string>

@@ -91,7 +91,7 @@ public class Activity_Graph extends Activity{
 
         this.createGraph();
 
-        adsHelper = new AdsHelper(getWindow().findViewById(android.R.id.content), getResources().getString(R.string.banner_ad_on_pastlifts),this);
+        adsHelper = new AdsHelper(getWindow().findViewById(android.R.id.content), getResources().getString(R.string.banner_ad_on_graph), this);
         adsHelper.setUpAds();
         int delay = 1000; // delay for 1 sec.
         int period = getResources().getInteger(R.integer.ad_refresh_rate);
